@@ -1,9 +1,11 @@
 ﻿using Appl.Models.BusinessLayer;
+using Appl.Models.BusinessLayer.Account;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
@@ -31,7 +33,10 @@ namespace Appl.Controllers
         [HttpPost]
         public JsonResult UserLogin(FormCollection model)
         {
-            if (model["Username"] == null || model["Password"] == null)
+            string username = model["Username"];
+            string password = model["Password"];
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 return Json(new
                 {
@@ -40,7 +45,7 @@ namespace Appl.Controllers
             }
 
             var client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/users/_count?query=%7B%22%24and%22%3A%5B%7B%22username%22%3A%22"
-                + model["Username"].ToString() + "%22%2C%20%22password%22%3A%22" + model["Password"].ToString() + "%22%7D%5D%7D");
+                + username + "%22%2C%20%22password%22%3A%22" + password + "%22%7D%5D%7D");
             var request = new RestRequest(Method.GET);
             request.AddHeader("postman-token", "620ae36d-3492-1aad-e4c7-7ea71dd53bdb");
             request.AddHeader("cache-control", "no-cache");

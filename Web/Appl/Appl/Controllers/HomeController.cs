@@ -1,4 +1,5 @@
 ﻿using Appl.Models.BusinessLayer;
+using Appl.Models.BusinessLayer.Account;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,9 @@ namespace Appl.Controllers
 
             if (Request.Cookies[Constant.COOKIE_NAME] != null)
             {
-                ViewBag.Username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+                string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+                username = InputEncoding.DecodePassword(username);
+                ViewBag.Username = username;
 
                 isLogged = true;
             }
