@@ -33,13 +33,13 @@ window.onload = function () {
     
     setTimeout(function () {
         $(".body-content")
-            .mouseenter(function (e) {
+            .hover(function (e) {
                 e.preventDefault();
                 $(this).css({
                     "background-color": "#FFF",
                     "transition": "background-color 2s"
                 });
-            }).mouseleave(function (e) {
+            }, function (e) {
                 e.preventDefault();
                 $(this).css({
                     "background-color": "#e6e6e6",
