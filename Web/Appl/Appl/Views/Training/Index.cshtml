@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/Home/style.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/Trainings/style.css" />
+
+    <script type="text/javascript">
+        var urlForm = {
+            getSubjectsData: '@ViewBag.GetSubjectsData',
+            postSubject: '@ViewBag.SendSubject',
+            currentUsername: '@ViewBag.Username'
+        };
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Trainings/script.js"></script>
+</head>
+<body>
+    <div class="container body-container">
+        <div class="col-md-3">
+            <h3>&nbsp;</h3>
+            <button id="add_subject" type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#subjectModal">Add Subject</button>
+            <h3>Subject Titles:</h3>
+
+            <div style="height: 60vh; overflow-y: auto;">
+                <ul class="nav nav-pills nav-stacked side-nav side-navigation"></ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h3>&nbsp;</h3>
+            <div class="panel panel-primary panel_main">
+                <div style="max-height: 70vh; overflow-y: auto;">
+                    <div class="panel-heading"><span id="comment_header_field"></span></div>
+                    <div class="panel-body"><span id="comment_body_field"></span></div>
+                    <div class="panel_author">
+                        <em><span>Author: </span><span id="author_field"></span></em>
+                    </div>
+                    <div id="comments_field" class="panel-footer">Comments:
+                        <button id="toggle_comments" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-down"></i></button>
+                        <br />
+                        <div class="comment_list">
+                            <ul></ul>
+                            <textarea id="comment_body"></textarea>
+                            <button id="send_comment" class="btn-primary btn-block ladda-button" data-style="expand-left"><span class="ladda-label">Comment</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+
+    @RenderPage("/Views/Training/_AddSubjectModal.cshtml")
+</body>
+</html>
+

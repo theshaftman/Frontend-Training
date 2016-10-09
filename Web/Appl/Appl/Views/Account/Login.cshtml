@@ -1,0 +1,52 @@
+﻿<html>
+    <head>
+        <title>Log In</title>
+        <link type="text/css" rel="stylesheet" href="~/Content/Account/style.css" />
+        <script type="text/javascript">
+            var urlContent = {
+                UrlPath: window.location.origin,
+                GetUserCredentials: '@ViewBag.GetUserCredentials'
+            };
+        </script>
+
+        <script type="text/javascript" src="~/Scripts/Login/script.js"></script>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-md-8">
+                <section id="loginForm">
+                    @Html.AntiForgeryToken()
+                    <h4>Use your account to log in.</h4>
+                    <hr />
+                    <div class="login-center">
+                        <form name="userLogin">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Username:</label>
+                                    <input type="text" id="username" class="form-control" required="required" autocomplete="on" autofocus="autofocus" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Password:</label>
+                                    <input type="password" id="password" class="form-control" required="required" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <input type="button" id="logIn" class="btn btn-primary" value="Log in" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>              
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+                </section>
+            </div>
+        </div>
+
+    </body>
+</html>

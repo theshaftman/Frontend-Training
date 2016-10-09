@@ -1,0 +1,9 @@
+﻿.thumbnail {
+    background-color: #f2f2f2;
+    transition: background-color 1s;
+}
+
+    .thumbnail:hover {
+        background-color: #FFF;
+        transition: background-color 1s;
+    }

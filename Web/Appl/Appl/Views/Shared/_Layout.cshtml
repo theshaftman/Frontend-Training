@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="~/Images/icon.ico" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/style.css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/script.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <!-- Ladda -->
+    <link type="text/css" rel="stylesheet" href="~/Scripts/Plugins/Ladda 0.9.0/ladda-themeless.min.css">
+    <script type="text/javascript" src="~/Scripts/Plugins/Ladda 0.9.0/spin.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Plugins/Ladda 0.9.0/ladda.min.js"></script>
+
+    @*<link type=" text />css" rel="stylesheet" href="~/Scripts/Plugins/Ladda/ladda-themeless.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Scripts/Plugins/Ladda/ladda.min.css" />
+
+    <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda-spin.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda-jquery.min.js"></script>*@
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+                <a class="navbar-brand" id="home_location" href="/">Home</a>
+                @if (Model)
+                {
+                    <a class="navbar-brand" id="training_location" href="/Training/Index">Training</a>
+                    <a class="navbar-brand" id="messages_location" href="/Messages/Index">Messages</a>
+                }
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>                
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content page_body_content">
+        @RenderBody()
+    </div>
+    
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

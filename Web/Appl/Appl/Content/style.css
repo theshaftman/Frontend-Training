@@ -1,0 +1,30 @@
+﻿body {
+    background-color: #e6e6e6;
+}
+
+.navbar {
+    background-color: #404040;
+    transition: background-color 2s;
+}
+
+    .navbar:hover {
+        background-color: #737373;
+        transition: background-color 2s;
+    }
+
+.body-content {
+    margin-top: 70px;
+    border: 1px solid #cccccc;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 10px 10px 5px #888888;
+    transition: background-color 2s;
+}
+
+.usernameLabel {
+    margin-top: 15px;
+    color: #999;
+}
+
+.page_body_content {
+    opacity: 0;
+}

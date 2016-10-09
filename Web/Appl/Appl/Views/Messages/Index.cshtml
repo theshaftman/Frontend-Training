@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/Home/style.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/Messages/style.css" />
+    
+    <script type="text/javascript">
+        var urlForm = {
+            postQuestion: '@ViewBag.PostQuestion',
+            getQuestionsNumber: '@ViewBag.GetQuestionsNumber',
+            username: '@ViewBag.Username'
+        };
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Messages/script.js"></script>
+</head>
+<body>
+    <h3>Over here you could write a question to me if you have any.</h3>
+    <br />
+    <form>
+        <div class="form-group">
+            <label for="comment">Question:</label>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+        <button id="submit" type="button" class="btn btn-primary btn-block ladda-button" data-style="expand-left"><span class="ladda-label">Send</span></button>
+    </form>
+
+    <div class="modal-footer">
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿#loginForm {
+    position: absolute;
+    left: 60%;
+}
+
+#loginForm input {
+    width: 300px;
+}
+
+.body-content {
+    height: 300px;
+}

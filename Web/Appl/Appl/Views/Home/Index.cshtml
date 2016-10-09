@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/Home/style.css" />
+
+    <script type="text/javascript">
+        var urlForm = {
+            postQuestion: '@Model',
+            username: '@ViewBag.Username'
+        };
+    </script>
+</head>
+<body>
+    <div class="page-header">
+        <h1>Home Page</h1>
+
+        <h1><small>Over here you would be able to see the current HTML trainig course.</small></h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="~/Images/home.png" alt="Home">
+                <div class="caption">
+                    <h3>Home</h3>
+                    <p>This is the homepage web site for the current trainings. You could see the available buttons which you could choose.</p>
+                    <p><a href="#" class="btn btn-primary btn-group-justified" role="button">Go</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="~/Images/training.png" alt="Training">
+                <div class="caption">
+                    <h3>Training</h3>
+                    <p>This is the trainings page. Over here you could see the lectures and the exercises from the current course.</p>
+                    <p><a href="/Training/Index" class="btn btn-primary btn-group-justified" role="button">Go</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="~/Images/messages.png" alt="Messages">
+                <div class="caption">
+                    <h3>Messages</h3>
+                    <p>This is the messages page. If you have any questions for the lectures you would be able to write them over there.</p>
+                    <p><a href="/Messages/Index" class="btn btn-primary btn-group-justified" role="button">Go</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+</body>
+</html>
