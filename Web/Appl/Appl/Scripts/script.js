@@ -47,5 +47,15 @@ window.onload = function () {
                 });
             });
     }, 1);
+    
+}
 
+function errorHandle(header, text) {
+    $("#error_modal_header").text("");
+    $("#error_modal_header").text(header);
+
+    $("#error_modal_body").text("");
+    $("#error_modal_body").text(text);
+
+    $("#errorModalButton").click();
 }

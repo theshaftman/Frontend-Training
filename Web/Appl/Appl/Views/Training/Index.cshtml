@@ -7,8 +7,7 @@
 
     <script type="text/javascript">
         var urlForm = {
-            getSubjectsData: '@ViewBag.GetSubjectsData',
-            postSubject: '@ViewBag.SendSubject',
+            currentServer: window.location.origin,
             currentUsername: '@ViewBag.Username'
         };
     </script>
@@ -19,7 +18,10 @@
     <div class="container body-container">
         <div class="col-md-3">
             <h3>&nbsp;</h3>
-            <button id="add_subject" type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#subjectModal">Add Subject</button>
+            <button id="add_subject" type="button" class="btn btn-success col-md-10" data-toggle="modal" data-target="#subjectModal">Add Subject</button>
+            <button id="refresh" type="button" class="btn btn-default col-md-2"><i class="glyphicon glyphicon-refresh"></i></button>
+            <button id="edit_subject" type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#subjectEditModal">Add Subject</button>
+            <br />
             <h3>Subject Titles:</h3>
 
             <div style="height: 60vh; overflow-y: auto;">
@@ -31,12 +33,18 @@
             <div class="panel panel-primary panel_main">
                 <div style="max-height: 70vh; overflow-y: auto;">
                     <div class="panel-heading"><span id="comment_header_field"></span></div>
-                    <div class="panel-body"><span id="comment_body_field"></span></div>
+                    <div class="panel-body">
+                        <span id="comment_body_field"></span>
+                        <div id="toggle_comments_actions">
+                            <button id="toggle_comments_actions_edit" class="btn btn-success">Edit</button>
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#modal">Remove</button>
+                        </div>
+                    </div>
                     <div class="panel_author">
                         <em><span>Author: </span><span id="author_field"></span></em>
                     </div>
                     <div id="comments_field" class="panel-footer">Comments:
-                        <button id="toggle_comments" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-down"></i></button>
+                        <button id="toggle_comments" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-down"></i></button>                        
                         <br />
                         <div class="comment_list">
                             <ul></ul>
@@ -48,11 +56,9 @@
             </div>
         </div>
     </div>
-
-    <div class="modal-footer">
-    </div>
-
+    
     @RenderPage("/Views/Training/_AddSubjectModal.cshtml")
+    @RenderPage("/Views/Training/_AddSubjectEditModal.cshtml")
 </body>
 </html>
 

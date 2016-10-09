@@ -4,13 +4,13 @@ $(window).on("load", function () {
 
     var currentUserame = "";
     var currentPassword = "";
-    
+
     $("#logIn").unbind();
     $("#logIn").on("click", function (event) {
         event.preventDefault();
 
         if (!validForm("username") || !validForm("password")) {
-            alert("Write username or password!");
+            errorHandle("Error!", "Write username or password!");
         }
 
         queryLogin()
@@ -24,7 +24,7 @@ $(window).on("load", function () {
                                 "Username": currentUserame,
                                 "Password": currentPassword
                             },
-                            url : "Home"
+                            url: "Home"
                         }
                     }).done(function (res) {
                         currentUserame = "";
@@ -33,11 +33,11 @@ $(window).on("load", function () {
                         window.location.href = urlContent.UrlPath + "/";
                     });
                 } else {
-                    alert("Username or password is not correct!");
+                    errorHandle("Error!", "Username or password is not correct!");
                 }
             });
     });
-    
+
     function validForm(fieldName) {
         var x = document.forms["userLogin"][fieldName].value;
         if (x == null || x == "") {
@@ -63,7 +63,7 @@ $(window).on("load", function () {
 
         return obj;
     }
-    
+
     function unHash(value) {
         var hash = ["aGs", "asS", "1as", "asd", "12s", "!as", ".as", "ouk", "por", "pek",
             "12d", "vbf", "mat", "qpg", "3yh", "asr", "098", "xcl", "laa", "ASe",

@@ -47,7 +47,13 @@
 
     <div class="container body-content page_body_content">
         @RenderBody()
+        <div class="modal-footer">
+        </div>
     </div>
+
+    @RenderPage("/Views/Shared/_Modal.cshtml")
+    @RenderPage("/Views/Shared/_ErrorModal.cshtml")
+    <button id="errorModalButton" style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#errorModal"></button>
     
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>

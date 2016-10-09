@@ -1,15 +1,25 @@
 ﻿'use strict'
 
 $(window).on("load", function () {
-    
+
     var init = function () {
         var self = this;
+
+        self.reloadPage = function () {
+            $("#refresh").unbind();
+            $("#refresh").on("click", function (e) {
+                e.preventDefault();
+
+                self.loadPage();
+            });
+        }
 
         self.loadPage = function (laddaItem) {
             var self = this;
 
             loadData()
                 .done(function (response) {
+                    response = JSON.parse(response.data);
                     units.trainingsData = response;
                     //console.log(response);
                     var nav = $(".side-navigation");
@@ -18,6 +28,11 @@ $(window).on("load", function () {
                     nav.css("opacity", "0");
                     $("#add_subject").removeAttr("style");
                     $("#add_subject").css({
+                        "display": "block",
+                        "opacity": "0"
+                    });
+                    $("#refresh").removeAttr("style");
+                    $("#refresh").css({
                         "display": "block",
                         "opacity": "0"
                     });
@@ -48,15 +63,20 @@ $(window).on("load", function () {
                         "opacity": "1",
                         "transition": "opacity 2s"
                     });
+                    $("#refresh").css({
+                        "opacity": "1",
+                        "transition": "opacity 2s"
+                    });                    
                 }).always(function () {
                     if (laddaItem) {
                         laddaItem.stop();
-                    }                  
+                    }
 
                     $("#cancel").click();
                 });
         }
-        
+
+        // Add a new subject functionality
         self.sendSubjectFunction = function () {
             var self = this;
 
@@ -66,16 +86,41 @@ $(window).on("load", function () {
                 l.start();
 
                 sendSubjectUpdate(l)
+                        .done(function (res) {
+                            units.trainingsData = res;
+                            self.loadPage(l);
+
+                            $("#sendSubjectTitle").val("");
+                            $("#sendSubjectBody").val("");
+                        });
+            });
+        }
+
+        // Edit subject functionality
+        self.sendEditSubjectFunction = function () {
+            var self = this;
+
+            $("#sendEditSubject").unbind();
+            $("#sendEditSubject").on("click", function () {
+                var l = Ladda.create(this);
+                l.start();
+
+                sendEditSubjectUpdate(l)
                     .done(function (res) {
                         units.trainingsData = res;
                         self.loadPage(l);
 
-                        $("#sendSubjectTitle").val("");
-                        $("#sendSubjectBody").val("");
+                        $("#sendSubjectEditTitle").val("");
+                        $("#sendSubjectEditBody").val("");
                     });
             });
         }
-        
+
+        // Update
+        function sendEditSubjectUpdate(ladda) {
+
+        }
+
         function liClick() {
             var self = this;
 
@@ -128,9 +173,22 @@ $(window).on("load", function () {
             });
         }
 
+        function compare(a, b) {
+            if (Number(a.id) > Number(b.id)) {
+                return -1;
+            }
+            if (Number(a.id) < Number(b.id)) {
+                return 1;
+            }
+            return 0;
+        }
+        
         function loadCurrentCommentsList(commentsList, item) {
             loadComments(item)
                 .done(function (response) {
+                    response = JSON.parse(response.data);                    
+                    response = response.sort(compare);
+
                     for (var i = 0; i < response.length; i++) {
                         var li = $("<li></li>");
                         var header = $("<h5></h5>").text(response[i].author);
@@ -151,20 +209,82 @@ $(window).on("load", function () {
         }
 
         function editFields(item) {
+            $("#toggle_comments_actions").css("display", "none");
+
+            if (item.author == urlForm.currentUsername) {
+                $("#toggle_comments_actions").css("display", "block");
+            }
+
             $("#comment_header_field").text("");
             $("#comment_header_field").text(item.subject_title);
             $("#comment_body_field").html("");
             $("#comment_body_field").html(item.subject_body);
             $("#author_field").text("");
             $("#author_field").text(item.author);
+
+            toggleCommentsActions(item);
+        }
+
+        function toggleCommentsActions(item) {
+            // Edit subject
+            $("#toggle_comments_actions_edit").unbind();
+            $("#toggle_comments_actions_edit").on("click", function (e) {
+                e.preventDefault();
+                $("#sendSubjectEditTitle").val("");
+                $("#sendSubjectEditBody").val("");
+
+                var subjectTitle = $("#comment_header_field").text();
+                $("#sendSubjectEditTitle").val(subjectTitle);
+
+                var subjectBody = $("#comment_body_field").html();
+                $("#sendSubjectEditBody").val(subjectBody);
+
+                $("#edit_subject").click();
+
+                // edit function
+            });
+
+            // Remove subject
+            $("#agree").unbind();
+            $("#agree").on("click", function (e) {
+                var l = Ladda.create(this);
+                l.start();
+
+                e.preventDefault();
+                deleteSubjectUpdate(item)
+                    .done(function (response) {
+                        self.loadPage(l);
+                    }).always(function () {
+                        $(".panel_main").css("opacity", "0");
+                        $(".close").click();
+                    });
+            });
+        }
+
+        // Delete subject
+        function deleteSubjectUpdate(item) {
+            var settings = {
+                "url": urlForm.currentServer + "/Training/DataDelete",
+                "type": "POST",
+                "data": {
+                    givenData: "subjects",
+                    id: item._id
+                }
+            }
+
+            //author: item.author,
+            //subject_title: item.subject_title
+
+            return $.ajax(settings);
         }
 
         function loadComments(item) {
             var settings = {
                 "type": "GET",
-                "url": "https://baas.kinvey.com/appdata/kid_rJ-gHb40/subjectComments?query={\"subject_id\": \"" + item.id + "\"}&sort={\"id\": 1}",
-                "headers": {
-                    "authorization": "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk"
+                "url": urlForm.currentServer + "/Training/GetData",
+                "data": {
+                    "givenData": "subjectComments",
+                    "query": "?query={\"subject_id\": \"" + item.id + "\"}&sort={\"id\": 1}"
                 }
             };
 
@@ -172,14 +292,9 @@ $(window).on("load", function () {
         }
 
         function loadData() {
-            var link = unHash(urlForm.getSubjectsData);
-
             var settings = {
                 "type": "GET",
-                "url": link,
-                "headers": {
-                    "authorization": "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk"
-                }
+                "url": urlForm.currentServer + "/Training/GetData"
             };
 
             return $.ajax(settings);
@@ -216,14 +331,18 @@ $(window).on("load", function () {
 
                 getAllCommentsCount()
                     .done(function (res) {
-                        sendCurrentComment(res.count, subjectID)
-                            .done(function (response) {
-                                // Clear the comment textarea.
-                                $("#comment_body").val("");
-                            }).always(function () {
-                                l.stop();
-                                loadCurrentCommentsList(commentsList, subjectID);
-                            });
+                        if (res.status == "success") {
+                            res = JSON.parse(res.data);
+
+                            sendCurrentComment(res.count, subjectID)
+                                .done(function (response) {
+                                    // Clear the comment textarea.
+                                    $("#comment_body").val("");
+                                }).always(function () {
+                                    l.stop();
+                                    loadCurrentCommentsList(commentsList, subjectID);
+                                });
+                        }
                     });
                 return false;
             });
@@ -232,9 +351,10 @@ $(window).on("load", function () {
         function getAllCommentsCount() {
             var settings = {
                 "type": "GET",
-                "url": "https://baas.kinvey.com/appdata/kid_rJ-gHb40/subjectComments/_count",
-                "headers": {
-                    "authorization": "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk"
+                "url": urlForm.currentServer + "/Training/GetData",
+                "data": {
+                    "givenData": "subjectComments",
+                    "query": "/_count"
                 }
             };
 
@@ -245,7 +365,7 @@ $(window).on("load", function () {
             var comment = $("#comment_body").val();
 
             if (comment.length <= 0) {
-                alert("Comment can not be empty.");
+                errorHandle("Error!", "Comment can not be empty.");
                 return false;
             }
 
@@ -253,15 +373,12 @@ $(window).on("load", function () {
 
             var settings = {
                 "type": "POST",
-                "url": "https://baas.kinvey.com/appdata/kid_rJ-gHb40/subjectComments",
+                "url": urlForm.currentServer + "/Training/InsertCommentData",
                 "data": {
-                    id: count,
-                    subject_id: subjectID.id,
+                    id: "" + count,
+                    subject_id: "" + subjectID.id,
                     author: urlForm.currentUsername,
-                    comment: comment
-                },
-                "headers": {
-                    "authorization": "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk"
+                    comment: "" + comment
                 }
             };
 
@@ -277,7 +394,7 @@ $(window).on("load", function () {
 
         if (!title || title.length <= 0 ||
                 !body || body.length <= 0) {
-            alert("Write a title and a text for the given subject.");
+            errorHandle("Error!", "Write a title and a text for the given subject.");
 
             setTimeout(function () {
                 if (laddaItem) {
@@ -293,61 +410,34 @@ $(window).on("load", function () {
             return dfd;
         }
 
-        var link = unHash(urlForm.postSubject);
+        body = body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-        var obj = $.ajax({
+        var settings = {
             "type": "POST",
-            "url": link,
+            "url": urlForm.currentServer + "/Training/InsertSubjectData",
             "data": {
-                id: index,
-                author: urlForm.currentUsername,
-                subject_title: title,
-                subject_body: body
-            },
-            "headers": {
-                "authorization": "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk"
+                "id": "" + index,
+                "author": urlForm.currentUsername,
+                "subject_title": "" + title,
+                "subject_body": "" + body
             }
-        });
+        };
+
+        var obj = $.ajax(settings);
+
+        // <ul><li>Test</li></ul>
 
         dfd.resolve(obj);
         return dfd;
     }
 
+    // Init method which loads the functionality
     var pageCreation = new init();
     pageCreation.loadPage();
     pageCreation.sendSubjectFunction();
+    pageCreation.sendEditSubjectFunction();
+    pageCreation.reloadPage();
     
-    function unHash(value) {
-        var hash = ["aGs", "asS", "1as", "asd", "12s", "!as", ".as", "ouk", "por", "pek",
-            "12d", "vbf", "mat", "qpg", "3yh", "asr", "098", "xcl", "laa", "ASe",
-            "pka", "1rs", "9ps", "4p7", "993", "128",
-            "ASW", "QWE", "TTR", "EWE", "AAA", "PRT", "Y6T", "LKL", "MNB", "OIP",
-            "QTY", "VVB", "MNM", "ZZX", "XCX", "CVC", "VBV", "MLP", "NJI", "VGY",
-            "ZSE", "XDR", "CFT", "BHU", "UHB", "TFC",
-            "//1", "154", "165", "098", "1pl", "wer", "100", "--9", "mbo", "]][",
-            "776", "112", "345", "111", "jkl", "hhh", "GGG"];
-        var chars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            ".", "/", "_", "-", ":", "?", "="];
-
-        var parts = value.match(/[\s\S]{1,3}/g) || [];
-        var result = "";
-        var index;
-
-        for (var i = 0; i < parts.length; i++) {
-            index = hash.indexOf(parts[i]);
-
-            if (index == -1) {
-                continue;
-            }
-
-            result += chars[index];
-        }
-
-        return result;
-    }
-
 });
 
 var units = {

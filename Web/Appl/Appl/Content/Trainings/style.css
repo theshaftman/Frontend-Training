@@ -6,7 +6,8 @@
     opacity: 0;
 }
 
-#add_subject {
+#add_subject,
+#refresh {
     display: none;
 }
 
@@ -21,16 +22,28 @@
     opacity: 0;
 }
 
+.panel-heading {
+    color: #FFF;
+    background-color: #428bca;
+}
+
 .side-navigation a {
     color: #101010;
 }
 
+#edit_subject {
+    display: none;
+}
+
 #sendSubjectTitle,
-#sendSubjectBody {
+#sendSubjectEditTitle,
+#sendSubjectBody,
+#sendSubjectEditBody {
     width: 100%;
 }
 
-#sendSubjectBody {
+#sendSubjectBody,
+#sendSubjectEditBody {
     height: 30vh;
 }
 
@@ -44,5 +57,10 @@ textarea {
 }
 
 .comment_list {
+    display: none;
+}
+
+#toggle_comments_actions {
+    margin-top: 50px;
     display: none;
 }

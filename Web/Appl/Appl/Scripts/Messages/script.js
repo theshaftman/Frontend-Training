@@ -4,7 +4,7 @@ $(window).on("load", function () {
     $("#submit").unbind();
     $("#submit").on("click", function (e) {
         if ($("#comment").val().trim() == "") {
-            alert("Please write an message!");
+            errorHandle("Error!", "Please write an message!");
             return false;
         }
 
@@ -17,9 +17,9 @@ $(window).on("load", function () {
                 l.stop();
 
                 if (response.status !== "fail") {
-                    alert("Message sent successful!");
+                    errorHandle("Success!", "Message sent successful!");
                 } else {
-                    alert("Error! Try again");
+                    errorHandle("Error!", "Try again");
                 }
             });
     });
@@ -27,7 +27,7 @@ $(window).on("load", function () {
     function sendQuestion() {
         var comment = $("#comment").val();
         var dfd = $.Deferred();
-        
+
         getQuestionsCount()
             .done(function (res) {
                 var currentID = Number(res.count) + 1;
@@ -44,13 +44,13 @@ $(window).on("load", function () {
                     "headers": {
                         "authorization": "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk"
                     }
-                };             
+                };
 
                 $.ajax(settings)
                     .done(function (response) {
                         dfd.resolve(response);
                     }).fail(function (err) {
-                        dfd.resolve({"status": "fail"});
+                        dfd.resolve({ "status": "fail" });
                     });
 
             });
@@ -87,7 +87,7 @@ $(window).on("load", function () {
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
             ".", "/", "_", "-", ":", "?", "="];
-        
+
         var parts = value.match(/[\s\S]{1,3}/g) || [];
         var result = "";
         var index;
