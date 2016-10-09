@@ -95,32 +95,7 @@ $(window).on("load", function () {
                         });
             });
         }
-
-        // Edit subject functionality
-        self.sendEditSubjectFunction = function () {
-            var self = this;
-
-            $("#sendEditSubject").unbind();
-            $("#sendEditSubject").on("click", function () {
-                var l = Ladda.create(this);
-                l.start();
-
-                sendEditSubjectUpdate(l)
-                    .done(function (res) {
-                        units.trainingsData = res;
-                        self.loadPage(l);
-
-                        $("#sendSubjectEditTitle").val("");
-                        $("#sendSubjectEditBody").val("");
-                    });
-            });
-        }
-
-        // Update
-        function sendEditSubjectUpdate(ladda) {
-
-        }
-
+        
         function liClick() {
             var self = this;
 
@@ -162,6 +137,9 @@ $(window).on("load", function () {
                 // Load comments
                 loadCurrentCommentsList(commentsList, item);
 
+                // Load updates
+                sendEditSubjectFunction(item);
+
                 setTimeout(function () {
                     $(".panel_main").css({
                         "opacity": "1",
@@ -171,6 +149,52 @@ $(window).on("load", function () {
 
                 return false;
             });
+        }
+
+        // Edit subject functionality
+        function sendEditSubjectFunction(item) {
+            var currentSelf = this;
+
+            $("#sendEditSubject").unbind();
+            $("#sendEditSubject").on("click", function () {
+                var l = Ladda.create(this);
+                l.start();
+
+                sendEditSubjectUpdate(item)
+                    .done(function (res) {
+                        // units.trainingsData = res;
+                        self.loadPage(l);
+                        $(".close").click();
+                        $("#sendSubjectEditTitle").val("");
+                        $("#sendSubjectEditBody").val("");
+                    }).always(function () {
+                        $(".panel_main").css("opacity", "0");
+                    });
+            });
+        }
+
+        // Update
+        function sendEditSubjectUpdate(item) {
+            var head = $("#sendSubjectEditTitle").val();
+            var body = $("#sendSubjectEditBody").val();
+
+            body = body.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+
+            var settings = {
+                "type": "PUT",
+                "url": urlForm.currentServer + "/Training/SubjectUpdate",
+                "data": {
+                    "editID": item._id,
+                    "id": item.id,
+                    "author": urlForm.currentUsername,
+                    "subject_title": "" + head,
+                    "subject_body": "" + body
+                }
+            };
+
+            return $.ajax(settings);
         }
 
         function compare(a, b) {
@@ -410,7 +434,9 @@ $(window).on("load", function () {
             return dfd;
         }
 
-        body = body.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        body = body.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
 
         var settings = {
             "type": "POST",
@@ -435,7 +461,6 @@ $(window).on("load", function () {
     var pageCreation = new init();
     pageCreation.loadPage();
     pageCreation.sendSubjectFunction();
-    pageCreation.sendEditSubjectFunction();
     pageCreation.reloadPage();
     
 });
