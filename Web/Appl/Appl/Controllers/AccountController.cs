@@ -23,7 +23,11 @@ namespace Appl.Controllers
             return View(false);
         }
 
-        // POST: /Account/Login
+        /// <summary>
+        /// Log in form.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult UserLogin(FormCollection model)
         {
@@ -66,7 +70,11 @@ namespace Appl.Controllers
 
             return result;
         }
-        
+
+        /// <summary>
+        /// Log off
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UserLogoff()
         {

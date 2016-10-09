@@ -23,6 +23,26 @@ $(window).on("load", function () {
             });
     });
 
+    $('input[type="password"]').unbind();
+    $('input[type="password"]').on('keydown', function(e) {
+        if (e.which == 13) {
+            e.preventDefault();
+
+            if (!validForm("username") || !validForm("password")) {
+                errorHandle("Error!", "Write username or password!");
+            }
+
+            queryLogin()
+                .done(function (response) {
+                    if (response.isFound) {
+                        window.location.href = urlContent.UrlPath + "/";
+                    } else {
+                        errorHandle("Error!", "Username or password is not correct!");
+                    }
+                });
+        }
+    });
+
     function validForm(fieldName) {
         var x = document.forms["userLogin"][fieldName].value;
         if (x == null || x == "") {
@@ -49,5 +69,5 @@ $(window).on("load", function () {
 
         return obj;
     }
-    
+
 });
