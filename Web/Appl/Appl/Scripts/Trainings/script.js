@@ -38,7 +38,10 @@ $(window).on("load", function () {
                     });
 
                     for (var i = 0; i < response.length; i++) {
-                        var li = $("<li></li>");
+                        var li = $("<li></li>")
+                            .attr({
+                                //"class": "panel panel-info"
+                            });
                         var link = $("<a></a>")
                             .attr({
                                 "href": "#",
@@ -66,7 +69,17 @@ $(window).on("load", function () {
                     $("#refresh").css({
                         "opacity": "1",
                         "transition": "opacity 2s"
-                    });                    
+                    });
+
+                    // Draggable
+                    //$(".side-navigation").sortable();
+                    //$(".side-navigation").disableSelection();
+
+                    //$("#sortable").sortable({
+                    //    revert: true
+                    //});
+
+                    //$("ul, li").disableSelection();
                 }).always(function () {
                     if (laddaItem) {
                         laddaItem.stop();
@@ -95,7 +108,7 @@ $(window).on("load", function () {
                         });
             });
         }
-        
+
         function liClick() {
             var self = this;
 
@@ -206,11 +219,11 @@ $(window).on("load", function () {
             }
             return 0;
         }
-        
+
         function loadCurrentCommentsList(commentsList, item) {
             loadComments(item)
                 .done(function (response) {
-                    response = JSON.parse(response.data);                    
+                    response = JSON.parse(response.data);
                     response = response.sort(compare);
 
                     for (var i = 0; i < response.length; i++) {
@@ -437,7 +450,7 @@ $(window).on("load", function () {
             }
         }
         var index = maxNumber + 1;
-        
+
         body = body.replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
@@ -470,7 +483,7 @@ $(window).on("load", function () {
     } catch (e) {
         errorHandle("Error", "We have an error loading the page. Please refresh your page.");
     }
-    
+
 });
 
 var units = {

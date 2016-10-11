@@ -187,6 +187,12 @@
     <Content Include="Scripts\Login\script.js" />
     <Content Include="Scripts\Messages\script.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Plugins\jquery-sortable-0-9-13.js" />
+    <Content Include="Scripts\Plugins\jquery-ui-1.12.1\jquery-1.12.4.js" />
+    <Content Include="Scripts\Plugins\jquery-ui-1.12.1\jquery-ui-min.js" />
+    <Content Include="Scripts\Plugins\jquery-ui-1.12.1\jquery-ui.css" />
+    <Content Include="Scripts\Plugins\jquery-ui-1.12.1\jquery-ui.js" />
+    <Content Include="Scripts\Plugins\jquery-ui-min-1-10-2.js" />
     <Content Include="Scripts\Plugins\Ladda 0.9.0\ladda-themeless.min.css" />
     <Content Include="Scripts\Plugins\Ladda 0.9.0\ladda.min.css" />
     <Content Include="Scripts\Plugins\Ladda 0.9.0\ladda.min.js" />
