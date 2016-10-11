@@ -292,7 +292,8 @@ $(window).on("load", function () {
                 "type": "POST",
                 "data": {
                     givenData: "subjects",
-                    id: item._id
+                    id: item._id,
+                    currentId: item.id
                 }
             }
 
@@ -428,12 +429,15 @@ $(window).on("load", function () {
             return dfd;
         }
 
-        var index = units.trainingsData.length + 1;
-
-        if ("" + index == "NaN") {
-            return dfd;
+        // Find max number.
+        var maxNumber = 0;
+        for (var i = 0; i < units.trainingsData.length; i++) {
+            if (Number(units.trainingsData[i].id) > maxNumber) {
+                maxNumber = Number(units.trainingsData[i].id);
+            }
         }
-
+        var index = maxNumber + 1;
+        
         body = body.replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
