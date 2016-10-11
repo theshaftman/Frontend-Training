@@ -18,11 +18,11 @@
     <script type="text/javascript" src="~/Scripts/Plugins/Ladda 0.9.0/ladda.min.js"></script>
 
     @*<link type=" text />css" rel="stylesheet" href="~/Scripts/Plugins/Ladda/ladda-themeless.min.css" />
-    <link type="text/css" rel="stylesheet" href="~/Scripts/Plugins/Ladda/ladda.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Scripts/Plugins/Ladda/ladda.min.css" />
 
-    <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda-spin.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda-jquery.min.js"></script>*@
+        <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda-spin.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/Plugins/Ladda/ladda-jquery.min.js"></script>*@
 </head>
 <body>
 
@@ -38,8 +38,7 @@
                 }
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>                
+                <ul class="nav navbar-nav"></ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -48,13 +47,15 @@
     <div class="container body-content page_body_content">
         @RenderBody()
         <div class="modal-footer">
+            <p class="text-center">&copy; Web Application</p>
+            @*<p class="text-center">by Mariyan Apostolov</p>*@
         </div>
     </div>
 
     @RenderPage("/Views/Shared/_Modal.cshtml")
     @RenderPage("/Views/Shared/_ErrorModal.cshtml")
     <button id="errorModalButton" style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#errorModal"></button>
-    
+
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>

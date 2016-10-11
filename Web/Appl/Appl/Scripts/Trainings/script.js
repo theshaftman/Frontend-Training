@@ -463,9 +463,13 @@ $(window).on("load", function () {
 
     // Init method which loads the functionality
     var pageCreation = new init();
-    pageCreation.loadPage();
-    pageCreation.sendSubjectFunction();
-    pageCreation.reloadPage();
+    try {
+        pageCreation.loadPage();
+        pageCreation.sendSubjectFunction();
+        pageCreation.reloadPage();
+    } catch (e) {
+        errorHandle("Error", "We have an error loading the page. Please refresh your page.");
+    }
     
 });
 
