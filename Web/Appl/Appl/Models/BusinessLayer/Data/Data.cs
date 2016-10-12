@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Appl.Models.Interfaces;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,13 @@ using System.Web;
 
 namespace Appl.Models.BusinessLayer.Data
 {
-    internal class Data
+    internal class Data : IData
     {
         internal Data()
         {
         }
 
-        internal Result GetData(string givenData = "", string query = "")
+        Result IData.GetData(string givenData = "", string query = "")
         {
             givenData = !string.IsNullOrEmpty(givenData) ? givenData : "subjects";
             query = !string.IsNullOrEmpty(query) ? query : "";
@@ -32,7 +33,7 @@ namespace Appl.Models.BusinessLayer.Data
             return data;
         }
 
-        internal IRestResponse Delete(string givenData, string givenID)
+        IRestResponse IData.Delete(string givenData, string givenID)
         {
             var client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/" + givenData + "/" + givenID);
             var request = new RestRequest(Method.DELETE);

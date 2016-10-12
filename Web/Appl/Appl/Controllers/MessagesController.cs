@@ -1,5 +1,7 @@
 ﻿using Appl.Models.BusinessLayer;
 using Appl.Models.BusinessLayer.Account;
+using Appl.Models.BusinessLayer.Data;
+using Appl.Models.Interfaces;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,13 @@ namespace Appl.Controllers
     [AllowAnonymous]
     public class MessagesController : Controller
     {
+        IData _data;
+
+        public MessagesController()
+        {
+            this._data = new Data();
+        }
+        
         // GET: Messages
         public ActionResult Index()
         {
@@ -36,17 +45,12 @@ namespace Appl.Controllers
         [HttpGet]
         public ActionResult GetQuestionsCount()
         {
-            var client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/questions/_count");
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("postman-token", "c35818ee-840d-ed36-d282-b2cc1283fc2f");
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("authorization", "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk");
-            IRestResponse response = client.Execute(request);
-
+            Result response = this._data.GetData("questions", "/_count");
+            
             JsonResult result = Json(new
             {
-                status = "success",
-                data = response.Content
+                status = response.Status,
+                data = response.Data
             }, JsonRequestBehavior.AllowGet);
 
             return result;

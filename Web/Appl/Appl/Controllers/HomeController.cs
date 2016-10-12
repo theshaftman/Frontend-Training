@@ -1,5 +1,7 @@
 ﻿using Appl.Models.BusinessLayer;
 using Appl.Models.BusinessLayer.Account;
+using Appl.Models.BusinessLayer.Data;
+using Appl.Models.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,13 @@ namespace Appl.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        IData _data;
+
+        public HomeController()
+        {
+            this._data = new Data();
+        }
+
         // GET: Home
         public ActionResult Index()
         {
@@ -28,18 +37,6 @@ namespace Appl.Controllers
             }
 
             return View(isLogged);
-        }
-        
-        [HttpGet]
-        public ActionResult GetData()
-        {
-            List<int> list = new List<int>();
-            list.Add(4);
-
-            return Json(new
-            {
-                data = list
-            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

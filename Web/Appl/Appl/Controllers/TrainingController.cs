@@ -1,6 +1,7 @@
 ﻿using Appl.Models.BusinessLayer;
 using Appl.Models.BusinessLayer.Account;
 using Appl.Models.BusinessLayer.Data;
+using Appl.Models.Interfaces;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -15,7 +16,12 @@ namespace Appl.Controllers
     [AllowAnonymous]
     public class TrainingController : Controller
     {
-        private Data currentData = new Data();
+        private IData _currentData;
+
+        public TrainingController()
+        {
+            this._currentData = new Data();
+        }
 
         // GET: Training
         public ActionResult Index()
@@ -43,7 +49,7 @@ namespace Appl.Controllers
         [HttpGet]
         public ActionResult GetData(string givenData, string query)
         {
-            Result getData = this.currentData.GetData(givenData, query);
+            Result getData = this._currentData.GetData(givenData, query);
             JsonResult result = Json(new
             {
                 status = getData.Status,
@@ -169,9 +175,9 @@ namespace Appl.Controllers
                 return null;
             }
 
-            IRestResponse response = this.currentData.Delete(givenData, givenID);
+            IRestResponse response = this._currentData.Delete(givenData, givenID);
 
-            Result subjectComments = this.currentData.GetData("subjectComments", "?query={\"subject_id\": \"" + currentID + "\"}");
+            Result subjectComments = this._currentData.GetData("subjectComments", "?query={\"subject_id\": \"" + currentID + "\"}");
 
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
             dynamic routesList = jsonSerializer.DeserializeObject(subjectComments.Data);
@@ -186,7 +192,7 @@ namespace Appl.Controllers
 
             for (int i = 0; i < list.Count; i++)
             {
-                var item = this.currentData.Delete("subjectComments", list[i]);
+                var item = this._currentData.Delete("subjectComments", list[i]);
             }
 
             JsonResult result = Json(new

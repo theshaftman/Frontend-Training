@@ -1,5 +1,7 @@
 ﻿using Appl.Models.BusinessLayer;
 using Appl.Models.BusinessLayer.Account;
+using Appl.Models.BusinessLayer.Data;
+using Appl.Models.Interfaces;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -18,6 +20,13 @@ namespace Appl.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
+        IData _data;
+
+        public AccountController()
+        {
+            this._data = new Data();
+        }
+
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -44,17 +53,12 @@ namespace Appl.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
 
-            var client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/users/_count?query=%7B%22%24and%22%3A%5B%7B%22username%22%3A%22"
-                + username + "%22%2C%20%22password%22%3A%22" + password + "%22%7D%5D%7D");
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("postman-token", "620ae36d-3492-1aad-e4c7-7ea71dd53bdb");
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("authorization", "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk");
-            IRestResponse response = client.Execute(request);
+            Result response = this._data.GetData("users", "/_count?query=%7B%22%24and%22%3A%5B%7B%22username%22%3A%22" + 
+                username + "%22%2C%20%22password%22%3A%22" + password + "%22%7D%5D%7D");
 
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            object isFoundObject = jsonSerializer.DeserializeObject(response.Content);
-            dynamic duff = JsonConvert.DeserializeObject(response.Content);
+            object isFoundObject = jsonSerializer.DeserializeObject(response.Data);
+            dynamic duff = JsonConvert.DeserializeObject(response.Data);
             string str = duff["count"].ToString();
             int number = int.Parse(str);
 
