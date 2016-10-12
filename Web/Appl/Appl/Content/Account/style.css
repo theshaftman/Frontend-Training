@@ -10,3 +10,12 @@
 .body-content {
     height: 300px;
 }
+
+.page_body_content {
+    height: 350px;
+}
+
+.modal-footer {
+    margin-top: 280px;
+    display: block;
+}
