@@ -19,8 +19,14 @@ $(window).on("load", function () {
 
             loadData()
                 .done(function (response) {
-                    response = JSON.parse(response.data);
-                    units.trainingsData = response;
+                    response = JSON.parse(response["data"]);
+
+                    // Sort response
+                    response = response.sort(compare);
+
+                    // Assign units trainings data.
+                    units["trainingsData"] = response;
+
                     //console.log(response);
                     var nav = $(".side-navigation");
                     nav.html("");
@@ -45,9 +51,8 @@ $(window).on("load", function () {
                         var link = $("<a></a>")
                             .attr({
                                 "href": "#",
-                                "attr-name": response[i].id
-                            })
-                            .text(response[i].subject_title);
+                                "attr-name": response[i]["id"]
+                            }).text(response[i]["subject_title"]);
 
                         //if (i === 0) {
                         //    li.addClass("active");
@@ -100,7 +105,7 @@ $(window).on("load", function () {
 
                 sendSubjectUpdate(l)
                         .done(function (res) {
-                            units.trainingsData = res;
+                            units["trainingsData"] = res;
                             self.loadPage(l);
 
                             $("#sendSubjectTitle").val("");
@@ -138,13 +143,22 @@ $(window).on("load", function () {
                 $(".side-nav li").removeClass("active");
                 $(this).addClass("active");
 
-                var activeIndex = Number($(this).find("a").attr("attr-name"));
+                var activeIndex = parseInt($(this).find("a").attr("attr-name"));
 
-                function findObject(object, value) {
-                    return object.id == activeIndex;
+                function findObject(inlineObject, value) {
+                    for (var i = 0; i < inlineObject.length; i++) {
+                        var currentNumber = parseInt(inlineObject[i]["id"]);
+                        if (currentNumber == value) {
+                            return inlineObject[i];
+                        }
+                    }
+
+                    return {};
                 }
 
-                var item = units.trainingsData.find(findObject);
+                var item = findObject(units["trainingsData"], activeIndex)
+
+                //var item = units.trainingsData.find(findObject);
                 editFields(item);
 
                 // Load comments
@@ -197,11 +211,11 @@ $(window).on("load", function () {
 
             var settings = {
                 "type": "PUT",
-                "url": urlForm.currentServer + "/Training/SubjectUpdate",
+                "url": urlForm["currentServer"] + "/Training/SubjectUpdate",
                 "data": {
-                    "editID": item._id,
-                    "id": item.id,
-                    "author": urlForm.currentUsername,
+                    "editID": item["_id"],
+                    "id": item["id"],
+                    "author": urlForm["currentUsername"],
                     "subject_title": "" + head,
                     "subject_body": "" + body
                 }
@@ -211,10 +225,10 @@ $(window).on("load", function () {
         }
 
         function compare(a, b) {
-            if (Number(a.id) > Number(b.id)) {
+            if (parseInt(a["id"]) < parseInt(b["id"])) {
                 return -1;
             }
-            if (Number(a.id) < Number(b.id)) {
+            if (parseInt(a["id"]) > parseInt(b["id"])) {
                 return 1;
             }
             return 0;
@@ -223,13 +237,13 @@ $(window).on("load", function () {
         function loadCurrentCommentsList(commentsList, item) {
             loadComments(item)
                 .done(function (response) {
-                    response = JSON.parse(response.data);
+                    response = JSON.parse(response["data"]);
                     response = response.sort(compare);
 
                     for (var i = 0; i < response.length; i++) {
                         var li = $("<li></li>");
-                        var header = $("<h5></h5>").text(response[i].author);
-                        var comment = $("<span></span>").text(response[i].comment);
+                        var header = $("<h5></h5>").text(response[i]["author"]);
+                        var comment = $("<span></span>").text(response[i]["comment"]);
                         var line = $("<hr />");
 
                         header.css("font-weight", "bold");
@@ -248,16 +262,16 @@ $(window).on("load", function () {
         function editFields(item) {
             $("#toggle_comments_actions").css("display", "none");
 
-            if (item.author == urlForm.currentUsername) {
+            if (item["author"] == urlForm["currentUsername"]) {
                 $("#toggle_comments_actions").css("display", "block");
             }
 
             $("#comment_header_field").text("");
-            $("#comment_header_field").text(item.subject_title);
+            $("#comment_header_field").text(item["subject_title"]);
             $("#comment_body_field").html("");
-            $("#comment_body_field").html(item.subject_body);
+            $("#comment_body_field").html(item["subject_body"]);
             $("#author_field").text("");
-            $("#author_field").text(item.author);
+            $("#author_field").text(item["author"]);
 
             toggleCommentsActions(item);
         }
@@ -301,12 +315,12 @@ $(window).on("load", function () {
         // Delete subject
         function deleteSubjectUpdate(item) {
             var settings = {
-                "url": urlForm.currentServer + "/Training/DataDelete",
+                "url": urlForm["currentServer"] + "/Training/DataDelete",
                 "type": "POST",
                 "data": {
                     givenData: "subjects",
-                    id: item._id,
-                    currentId: item.id
+                    id: item["_id"],
+                    currentId: item["id"]
                 }
             }
 
@@ -319,10 +333,10 @@ $(window).on("load", function () {
         function loadComments(item) {
             var settings = {
                 "type": "GET",
-                "url": urlForm.currentServer + "/Training/GetData",
+                "url": urlForm["currentServer"] + "/Training/GetData",
                 "data": {
                     "givenData": "subjectComments",
-                    "query": "?query={\"subject_id\": \"" + item.id + "\"}&sort={\"id\": 1}"
+                    "query": "?query={\"subject_id\": \"" + item["id"] + "\"}&sort={\"id\": 1}"
                 }
             };
 
@@ -332,7 +346,7 @@ $(window).on("load", function () {
         function loadData() {
             var settings = {
                 "type": "GET",
-                "url": urlForm.currentServer + "/Training/GetData"
+                "url": urlForm["currentServer"] + "/Training/GetData"
             };
 
             return $.ajax(settings);
@@ -344,10 +358,10 @@ $(window).on("load", function () {
                 e.preventDefault();
 
                 var currentIcon = $(this).find("i");
-                units.commentsExtended = !units.commentsExtended;
+                units["commentsExtended"] = !units["commentsExtended"];
                 currentIcon.removeAttr("class");
 
-                if (units.commentsExtended) {
+                if (units["commentsExtended"]) {
                     currentIcon.addClass("glyphicon glyphicon-chevron-up");
                     $(".comment_list").css("display", "block");
                 } else {
@@ -369,10 +383,10 @@ $(window).on("load", function () {
 
                 getAllCommentsCount()
                     .done(function (res) {
-                        if (res.status == "success") {
-                            res = JSON.parse(res.data);
+                        if (res["status"] == "success") {
+                            res = JSON.parse(res["data"]);
 
-                            sendCurrentComment(res.count, subjectID)
+                            sendCurrentComment(res["count"], subjectID)
                                 .done(function (response) {
                                     // Clear the comment textarea.
                                     $("#comment_body").val("");
@@ -389,7 +403,7 @@ $(window).on("load", function () {
         function getAllCommentsCount() {
             var settings = {
                 "type": "GET",
-                "url": urlForm.currentServer + "/Training/GetData",
+                "url": urlForm["currentServer"] + "/Training/GetData",
                 "data": {
                     "givenData": "subjectComments",
                     "query": "/_count"
@@ -411,11 +425,11 @@ $(window).on("load", function () {
 
             var settings = {
                 "type": "POST",
-                "url": urlForm.currentServer + "/Training/InsertCommentData",
+                "url": urlForm["currentServer"] + "/Training/InsertCommentData",
                 "data": {
                     id: "" + count,
-                    subject_id: "" + subjectID.id,
-                    author: urlForm.currentUsername,
+                    subject_id: "" + subjectID["id"],
+                    author: urlForm["currentUsername"],
                     comment: "" + comment
                 }
             };
@@ -444,9 +458,9 @@ $(window).on("load", function () {
 
         // Find max number.
         var maxNumber = 0;
-        for (var i = 0; i < units.trainingsData.length; i++) {
-            if (Number(units.trainingsData[i].id) > maxNumber) {
-                maxNumber = Number(units.trainingsData[i].id);
+        for (var i = 0; i < units["trainingsData"].length; i++) {
+            if (parseInt(units["trainingsData"][i]["id"]) > maxNumber) {
+                maxNumber = parseInt(units["trainingsData"][i]["id"]);
             }
         }
         var index = maxNumber + 1;
@@ -457,10 +471,10 @@ $(window).on("load", function () {
 
         var settings = {
             "type": "POST",
-            "url": urlForm.currentServer + "/Training/InsertSubjectData",
+            "url": urlForm["currentServer"] + "/Training/InsertSubjectData",
             "data": {
                 "id": "" + index,
-                "author": urlForm.currentUsername,
+                "author": urlForm["currentUsername"],
                 "subject_title": "" + title,
                 "subject_body": "" + body
             }

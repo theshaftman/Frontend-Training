@@ -15,8 +15,8 @@ $(window).on("load", function () {
 
         queryLogin()
             .done(function (response) {
-                if (response.isFound) {
-                    window.location.href = urlContent.UrlPath + "/";
+                if (response["isFound"]) {
+                    window.location.href = urlContent["UrlPath"] + "/";
                 } else {
                     errorHandle("Error!", "Username or password is not correct!");
                 }
@@ -35,7 +35,7 @@ $(window).on("load", function () {
             queryLogin()
                 .done(function (response) {
                     if (response.isFound) {
-                        window.location.href = urlContent.UrlPath + "/";
+                        window.location.href = urlContent["UrlPath"] + "/";
                     } else {
                         errorHandle("Error!", "Username or password is not correct!");
                     }
@@ -44,7 +44,7 @@ $(window).on("load", function () {
     });
 
     function validForm(fieldName) {
-        var x = document.forms["userLogin"][fieldName].value;
+        var x = document.forms["userLogin"][fieldName]["value"];
         if (x == null || x == "") {
             return false;
         }
@@ -60,7 +60,7 @@ $(window).on("load", function () {
 
         var settings = {
             "type": "POST",
-            "url": urlContent.UrlPath + "/Account/UserLogin",
+            "url": urlContent["UrlPath"] + "/Account/UserLogin",
             "data": {
                 "Username": valueHash(currentUserame),
                 "Password": currentPassword

@@ -29,16 +29,16 @@ $(window).on("load", function () {
 
         getQuestionsCount()
             .done(function (res) {
-                res = JSON.parse(res.data);
-                var currentID = Number(res.count) + 1;
+                res = JSON.parse(res["data"]);
+                var currentID = Number(res["count"]) + 1;
                 var comment = $("#comment").val();
 
                 var settings = {
                     "type": "POST",
-                    "url": urlForm.currentServer + "/Messages/SendQuestion",
+                    "url": urlForm["currentServer"] + "/Messages/SendQuestion",
                     "data": {
                         "id": "" + currentID,
-                        "author": urlForm.username,
+                        "author": urlForm["username"],
                         "question": "" + comment
                     }
                 };
