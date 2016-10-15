@@ -92,6 +92,41 @@ namespace Appl.Models.BusinessLayer.Data
             return response;
         }
 
+        IRestResponse IData.ModifyComment(string updateID, FormCollection data)
+        {
+            string datatable = updateID != null ? "subjectComments/" + updateID : "subjectComments";
+            string id = data["id"];
+            string subjectID = data["subject_id"];
+            string author = data["author"];
+            string comment = data["comment"];
+
+            if (string.IsNullOrEmpty(id) ||
+                string.IsNullOrEmpty(subjectID) ||
+                string.IsNullOrEmpty(author) ||
+                string.IsNullOrEmpty(comment))
+            {
+                return null;
+            }
+
+            RestClient client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/" + datatable);
+            Method action = updateID != null ? Method.PUT : Method.POST;
+
+            var request = new RestRequest(action);
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("authorization", "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk");
+            request.AddHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001");
+
+            string[] inputNames = new string[] { "id", "subject_id", "author", "comment" };
+            string[] inputParameteres = new string[] { id, subjectID, author, comment };
+
+
+            request.AddParameter("multipart/form-data; boundary=---011000010111000001101001", 
+                GetPostMethod(inputNames, inputParameteres), ParameterType.RequestBody);
+
+            IRestResponse response = client.Execute(request);
+            return response;
+        }
+
         #endregion
 
         #region Messages

@@ -142,41 +142,25 @@ namespace Appl.Controllers
         [HttpPost]
         public JsonResult InsertCommentData(FormCollection data)
         {
-            string datatable = "subjectComments";
-            string id = data["id"];
-            string subjectID = data["subject_id"];
-            string author = data["author"];
             string comment = data["comment"];
 
-            if (string.IsNullOrEmpty(id) ||
-                string.IsNullOrEmpty(subjectID) ||
-                string.IsNullOrEmpty(author) ||
-                string.IsNullOrEmpty(comment))
+            if (comment.Contains("<script") ||
+                subjectBody.Contains("&lt;script"))
             {
                 return null;
             }
 
-            if (comment.Contains("<script"))
+            IRestResponse response = this._currentData.ModifyComment(null, data);
+            string currentStatus = "success";
+
+            if (response == null)
             {
-                return null;
+                currentStatus = "fail";
             }
-
-            RestClient client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/" + datatable);
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("authorization", "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk");
-            request.AddHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001");
-            request.AddParameter("multipart/form-data; boundary=---011000010111000001101001", "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"id\"\r\n\r\n" + 
-                id + "\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"subject_id\"\r\n\r\n" + 
-                subjectID + "\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"author\"\r\n\r\n" + 
-                author + "\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"comment\"\r\n\r\n" + 
-                comment + "\r\n-----011000010111000001101001--", ParameterType.RequestBody);
-
-            IRestResponse response = client.Execute(request);
 
             JsonResult result = Json(new
             {
-                status = "success"
+                status = currentStatus
             }, JsonRequestBehavior.AllowGet);
 
             return result;
