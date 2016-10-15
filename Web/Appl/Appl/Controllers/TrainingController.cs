@@ -62,10 +62,11 @@ namespace Appl.Controllers
         #endregion
 
         #region Subjects
-
+        
         [HttpPost]
-        public JsonResult InsertSubjectData(FormCollection data)
+        public ActionResult ModifySubjectData(FormCollection data)
         {
+            string editID = data["editID"];
             string subjectBody = data["subject_body"];
 
             if (subjectBody.Contains("<script") ||
@@ -77,39 +78,7 @@ namespace Appl.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
 
-            IRestResponse response = this._currentData.InsertUpdateSubject(null, data);
-
-            string currentStatus = "success";
-            if (response == null)
-            {
-                currentStatus = "fail";
-            }
-
-            JsonResult result = Json(new
-            {
-                status = currentStatus
-            }, JsonRequestBehavior.AllowGet);
-
-            return result;
-        }
-
-        [HttpPut]
-        public ActionResult UpdateSubjectData(FormCollection data)
-        {
-            string editID = data["editID"];
-            string subjectBody = data["subject_body"];
-
-            if (string.IsNullOrEmpty(editID) ||
-                subjectBody.Contains("<script") ||
-                subjectBody.Contains("&lt;script"))
-            {
-                return Json(new
-                {
-                    status = "fail"
-                }, JsonRequestBehavior.AllowGet);
-            }
-
-            IRestResponse response = this._currentData.InsertUpdateSubject(editID, data);
+            IRestResponse response = this._currentData.ModifySubject(editID, data);
 
             string currentStatus = "success";
             if (response == null)

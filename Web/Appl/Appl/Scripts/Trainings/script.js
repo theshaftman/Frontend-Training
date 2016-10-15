@@ -210,8 +210,8 @@ $(window).on("load", function () {
                 .replace(/>/g, '&gt;');
 
             var settings = {
-                "type": "PUT",
-                "url": urlForm["currentServer"] + "/Training/UpdateSubjectData",
+                "type": "POST",
+                "url": urlForm["currentServer"] + "/Training/ModifySubjectData",
                 "data": {
                     "editID": item["_id"],
                     "id": item["id"],
@@ -472,7 +472,7 @@ $(window).on("load", function () {
 
         var settings = {
             "type": "POST",
-            "url": urlForm["currentServer"] + "/Training/InsertSubjectData",
+            "url": urlForm["currentServer"] + "/Training/ModifySubjectData",
             "data": {
                 "id": "" + index,
                 "author": urlForm["currentUsername"],

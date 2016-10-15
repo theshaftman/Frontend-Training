@@ -50,7 +50,7 @@ namespace Appl.Models.BusinessLayer.Data
 
         #region Training
 
-        IRestResponse IData.InsertUpdateSubject(string updateID, FormCollection data)
+        IRestResponse IData.ModifySubject(string updateID, FormCollection data)
         {
             string datatable = updateID != null ?  "subjects/" + updateID : "subjects";
             string id = data["id"];
