@@ -85,8 +85,15 @@ namespace Appl.Models.BusinessLayer.Data
             string[] inputNames = new string[] { "id", "author", "subject_title", "subject_body" };
             string[] inputParameteres = new string[] { id, author, subjectTitle, subjectBody };
 
+            string parameter = GetPostMethod(inputNames, inputParameteres);
+
+            if (parameter == null)
+            {
+                return null;
+            }
+
             request.AddParameter("multipart/form-data; boundary=---011000010111000001101001", 
-                GetPostMethod(inputNames, inputParameteres), ParameterType.RequestBody);
+                parameter, ParameterType.RequestBody);
 
             IRestResponse response = client.Execute(request);
             return response;
@@ -119,9 +126,15 @@ namespace Appl.Models.BusinessLayer.Data
             string[] inputNames = new string[] { "id", "subject_id", "author", "comment" };
             string[] inputParameteres = new string[] { id, subjectID, author, comment };
 
+            string parameter = GetPostMethod(inputNames, inputParameteres);
+
+            if (parameter == null)
+            {
+                return null;
+            }
 
             request.AddParameter("multipart/form-data; boundary=---011000010111000001101001", 
-                GetPostMethod(inputNames, inputParameteres), ParameterType.RequestBody);
+                parameter, ParameterType.RequestBody);
 
             IRestResponse response = client.Execute(request);
             return response;
@@ -154,8 +167,15 @@ namespace Appl.Models.BusinessLayer.Data
             string[] inputNames = new string[] { "id", "author", "question" };
             string[] inputParameteres = new string[] { id, author, question };
 
-            request.AddParameter("multipart/form-data; boundary=---011000010111000001101001", GetPostMethod(inputNames, inputParameteres),
-                ParameterType.RequestBody);
+            string parameter = GetPostMethod(inputNames, inputParameteres);
+
+            if (parameter == null)
+            {
+                return null;
+            }
+
+            request.AddParameter("multipart/form-data; boundary=---011000010111000001101001", 
+                parameter, ParameterType.RequestBody);
 
             IRestResponse response = client.Execute(request);
             return response;
