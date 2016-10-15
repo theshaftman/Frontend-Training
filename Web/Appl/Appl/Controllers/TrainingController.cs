@@ -145,7 +145,7 @@ namespace Appl.Controllers
             string comment = data["comment"];
 
             if (comment.Contains("<script") ||
-                subjectBody.Contains("&lt;script"))
+                comment.Contains("&lt;script"))
             {
                 return null;
             }
