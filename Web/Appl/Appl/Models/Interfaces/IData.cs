@@ -14,6 +14,8 @@ namespace Appl.Models.Interfaces
 
         IRestResponse Delete(string givenData, string givenID);
 
+        IRestResponse InsertUpdateSubject(string updateID = null, FormCollection data = null);
+
         IRestResponse SendQuestion(FormCollection data);
     }
 }

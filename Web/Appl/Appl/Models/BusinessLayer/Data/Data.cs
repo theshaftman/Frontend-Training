@@ -48,6 +48,54 @@ namespace Appl.Models.BusinessLayer.Data
             return response;
         }
 
+        #region Training
+
+        IRestResponse IData.InsertUpdateSubject(string updateID, FormCollection data)
+        {
+            string datatable = updateID != null ?  "subjects/" + updateID : "subjects";
+            string id = data["id"];
+            string author = data["author"];
+            string subjectTitle = data["subject_title"];
+            string subjectBody = data["subject_body"];
+            bool isEscaping = data["isEscaping"] != null && 
+                (data["isEscaping"].ToString().ToUpper() == "TRUE" || data["isEscaping"].ToString() == "1") ?
+                true : false;
+
+            if (string.IsNullOrEmpty(id) ||
+                string.IsNullOrEmpty(author) ||
+                string.IsNullOrEmpty(subjectTitle) ||
+                string.IsNullOrEmpty(subjectBody))
+            {
+                return null;
+            }
+
+            if (isEscaping)
+            {
+                subjectBody = GetEscapingString(subjectBody);
+            }
+
+            RestClient client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/" + datatable);
+            Method action = updateID != null ? Method.PUT : Method.POST;
+
+            RestRequest request = new RestRequest(action);
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("authorization", "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk");
+            request.AddHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001");
+
+            string[] inputNames = new string[] { "id", "author", "subject_title", "subject_body" };
+            string[] inputParameteres = new string[] { id, author, subjectTitle, subjectBody };
+
+            request.AddParameter("multipart/form-data; boundary=---011000010111000001101001", 
+                GetPostMethod(inputNames, inputParameteres), ParameterType.RequestBody);
+
+            IRestResponse response = client.Execute(request);
+            return response;
+        }
+
+        #endregion
+
+        #region Messages
+
         IRestResponse IData.SendQuestion(FormCollection data)
         {
             string id = data["id"];
@@ -78,6 +126,8 @@ namespace Appl.Models.BusinessLayer.Data
             return response;
         }
 
+        #endregion
+
         private string GetPostMethod(string[] inputNames, string[] inputParameters)
         {
             if (inputNames.Length != inputParameters.Length)
@@ -98,6 +148,15 @@ namespace Appl.Models.BusinessLayer.Data
             sb.Append("-----011000010111000001101001--");
 
             return sb.ToString();
+        }
+
+        private string GetEscapingString(string input)
+        {
+            input = input.Replace("&amp;", "&");
+            input = input.Replace("&lt;", "<");
+            input = input.Replace("&gt;", ">");
+
+            return input;
         }
     }
 }

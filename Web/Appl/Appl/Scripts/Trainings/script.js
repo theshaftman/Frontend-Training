@@ -211,13 +211,14 @@ $(window).on("load", function () {
 
             var settings = {
                 "type": "PUT",
-                "url": urlForm["currentServer"] + "/Training/SubjectUpdate",
+                "url": urlForm["currentServer"] + "/Training/UpdateSubjectData",
                 "data": {
                     "editID": item["_id"],
                     "id": item["id"],
                     "author": urlForm["currentUsername"],
                     "subject_title": "" + head,
-                    "subject_body": "" + body
+                    "subject_body": "" + body,
+                    "isEscaping": true
                 }
             };
 
@@ -476,7 +477,8 @@ $(window).on("load", function () {
                 "id": "" + index,
                 "author": urlForm["currentUsername"],
                 "subject_title": "" + title,
-                "subject_body": "" + body
+                "subject_body": "" + body,
+                "isEscaping": true
             }
         };
 
