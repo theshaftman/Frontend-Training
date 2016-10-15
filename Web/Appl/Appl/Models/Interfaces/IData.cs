@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Appl.Models.Interfaces
 {
@@ -12,5 +13,7 @@ namespace Appl.Models.Interfaces
         Result GetData(string givenData = "", string query = "");
 
         IRestResponse Delete(string givenData, string givenID);
+
+        IRestResponse SendQuestion(FormCollection data);
     }
 }
