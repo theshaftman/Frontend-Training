@@ -46,6 +46,10 @@ window.onload = function () {
                     "transition": "background-color 2s"
                 });
             });
+
+        $("#webFooter").css({
+            "font": "15px arial, sans-serif"
+        });
     }, 1);
     
 }

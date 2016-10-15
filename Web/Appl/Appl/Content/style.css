@@ -2,6 +2,14 @@
     background-color: #e6e6e6;
 }
 
+#webFooter {
+    font: 15px arial, sans-serif!important;
+}
+
+#errorModalButton {
+    display: none;
+}
+
 .page_body_content {
     max-height: 90vh;
 }
