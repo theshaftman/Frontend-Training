@@ -13,35 +13,32 @@ namespace Appl.Controllers
 {
     public class UpdatesController : Controller
     {
-        private IData _data;
+        IUpdates _updates;
 
         public UpdatesController()
         {
-            this._data = new Data();
+            this._updates = new Updates();
         }
 
         [HttpGet]
-        public ActionResult GetUpdate(FormCollection data)
+        public ActionResult GetUpdates(FormCollection data)
         {
             string currentStatus = "fail";
-            string modificationID = null;
+            IList<Update> modificationData = null;
 
             if (Request.Cookies[Constant.COOKIE_NAME] != null)
             {
                 string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
-                username = InputEncoding.DecodePassword(username);
-                Result currentData = this._data.GetData("userLastModificationID", "?query={\"userID\": \"" + username + "\"}");
+                IList<Update> currentData = this._updates.GetCurrentUpdates(username);
                 
-                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-                dynamic routesList = jsonSerializer.DeserializeObject(currentData.Data);
-                modificationID = routesList[0]["modificationID"].ToString();
-                currentStatus = currentData.Status;
+                modificationData = currentData;
+                currentStatus = "success";
             }
 
             JsonResult result = Json(new
             {
                 status = currentStatus,
-                modificationID = modificationID
+                modificationsData = modificationData
             }, JsonRequestBehavior.AllowGet);
 
             return result;

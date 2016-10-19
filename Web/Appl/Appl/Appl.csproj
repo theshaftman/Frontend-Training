@@ -221,7 +221,10 @@
     <Compile Include="Models\BusinessLayer\Constant.cs" />
     <Compile Include="Models\BusinessLayer\Data\Data.cs" />
     <Compile Include="Models\BusinessLayer\Data\Result.cs" />
+    <Compile Include="Models\BusinessLayer\Data\Update.cs" />
+    <Compile Include="Models\BusinessLayer\Data\Updates.cs" />
     <Compile Include="Models\Interfaces\IData.cs" />
+    <Compile Include="Models\Interfaces\IUpdates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
