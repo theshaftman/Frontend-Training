@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
 namespace Appl.Models.BusinessLayer.Data
@@ -45,6 +46,15 @@ namespace Appl.Models.BusinessLayer.Data
             }
             
             return list;
+        }
+
+        bool IUpdates.UpdateCurrentData(FormCollection collection, string username)
+        {
+            bool result = false;
+
+            username = InputEncoding.DecodePassword(username);
+
+            return result;
         }
     }
 }

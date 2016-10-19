@@ -21,7 +21,7 @@ namespace Appl.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetUpdates(FormCollection data)
+        public ActionResult GetUpdates()
         {
             string currentStatus = "fail";
             IList<Update> modificationData = null;
@@ -47,12 +47,16 @@ namespace Appl.Controllers
         [HttpPost]
         public ActionResult Update(FormCollection data)
         {
-            string currentStatus = "fail";
+            bool isUpdated = false;
 
             if (Request.Cookies[Constant.COOKIE_NAME] != null)
             {
-                currentStatus = "success";
+                string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+
+                isUpdated = this._updates.UpdateCurrentData(data, username);
             }
+
+            string currentStatus = isUpdated ? "success" : "fail";
 
             JsonResult result = Json(new
             {
