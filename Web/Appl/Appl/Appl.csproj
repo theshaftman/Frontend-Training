@@ -213,6 +213,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
+    <Compile Include="Controllers\UpdatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -253,6 +254,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Home\" />
+    <Folder Include="Views\Updates\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
