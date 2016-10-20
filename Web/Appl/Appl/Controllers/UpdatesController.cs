@@ -45,7 +45,7 @@ namespace Appl.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(FormCollection data)
+        public ActionResult Update()
         {
             bool isUpdated = false;
 
@@ -53,7 +53,7 @@ namespace Appl.Controllers
             {
                 string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
 
-                isUpdated = this._updates.UpdateCurrentData(data, username);
+                isUpdated = this._updates.UpdateCurrentData(username);
             }
 
             string currentStatus = isUpdated ? "success" : "fail";

@@ -12,6 +12,6 @@ namespace Appl.Models.Interfaces
     {
         IList<Update> GetCurrentUpdates(string username);
 
-        bool UpdateCurrentData(FormCollection collection, string username);
+        bool UpdateCurrentData(string username);
     }
 }

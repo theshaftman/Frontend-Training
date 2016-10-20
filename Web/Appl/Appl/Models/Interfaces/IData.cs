@@ -19,5 +19,7 @@ namespace Appl.Models.Interfaces
         IRestResponse ModifyComment(string updateID = null, FormCollection data = null);
 
         IRestResponse SendQuestion(FormCollection data);
+
+        IRestResponse ModifyUpdate(string username, string modificationID, string updateNumber);
     }
 }

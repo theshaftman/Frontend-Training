@@ -183,6 +183,46 @@ namespace Appl.Models.BusinessLayer.Data
 
         #endregion
 
+        #region Updates
+
+        IRestResponse IData.ModifyUpdate(string username, string modificationID, string updateNumber)
+        {
+            if (string.IsNullOrEmpty(username) ||
+                string.IsNullOrEmpty(modificationID) ||
+                string.IsNullOrEmpty(updateNumber))
+            {
+                return null;
+            }
+
+            string datatable = "userLastModificationID/" + modificationID;
+
+            RestClient client = new RestClient("https://baas.kinvey.com/appdata/kid_rJ-gHb40/" + datatable);
+            Method action = Method.PUT;
+
+            RestRequest request = new RestRequest(action);
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("authorization", "Basic a2lkX3JKLWdIYjQwOmMxNDBmN2UwMDEyZDQ3YjE5YTUzMjc4ZTExYWM1NjRk");
+            request.AddHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001");
+
+            string[] inputNames = new string[] { "userID", "modificationID" };
+            string[] inputParameteres = new string[] { username, updateNumber };
+
+            string parameter = GetPostMethod(inputNames, inputParameteres);
+
+            if (parameter == null)
+            {
+                return null;
+            }
+
+            request.AddParameter("multipart/form-data; boundary=---011000010111000001101001",
+                parameter, ParameterType.RequestBody);
+
+            IRestResponse response = client.Execute(request);
+            return response;
+        }
+
+        #endregion
+
         private string GetPostMethod(string[] inputNames, string[] inputParameters)
         {
             if (inputNames.Length != inputParameters.Length)

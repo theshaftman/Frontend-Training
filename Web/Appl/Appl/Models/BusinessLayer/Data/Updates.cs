@@ -1,5 +1,6 @@
 ﻿using Appl.Models.BusinessLayer.Account;
 using Appl.Models.Interfaces;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,12 +49,36 @@ namespace Appl.Models.BusinessLayer.Data
             return list;
         }
 
-        bool IUpdates.UpdateCurrentData(FormCollection collection, string username)
+        bool IUpdates.UpdateCurrentData(string username)
         {
-            bool result = false;
-
+            bool result = true;
             username = InputEncoding.DecodePassword(username);
 
+            try
+            {
+                // Get user last modification id.
+                Result currentData = this._data.GetData("userLastModificationID", "?query={\"userID\": \"" + username + "\"}");
+
+                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                dynamic routesList = jsonSerializer.DeserializeObject(currentData.Data);
+                string modificationID = routesList[0]["_id"].ToString();
+
+                Result updatesData = this._data.GetData("userModification", "?query={}&sort={\"id\": -1}&limit=1");
+
+                JavaScriptSerializer jsonResultSerializer = new JavaScriptSerializer();
+                dynamic routesResultList = jsonResultSerializer.DeserializeObject(updatesData.Data);
+                string updateNumber = routesResultList[0]["id"].ToString();
+
+                int number = int.Parse(updateNumber);
+                number += 1;
+
+                IRestResponse data = this._data.ModifyUpdate(username, modificationID, number.ToString());
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            
             return result;
         }
     }
