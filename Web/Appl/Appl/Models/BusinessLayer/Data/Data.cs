@@ -1,4 +1,5 @@
-﻿using Appl.Models.Interfaces;
+﻿using Appl.Models.BusinessLayer.Structure;
+using Appl.Models.Interfaces;
 using RestSharp;
 using System;
 using System.Collections.Generic;

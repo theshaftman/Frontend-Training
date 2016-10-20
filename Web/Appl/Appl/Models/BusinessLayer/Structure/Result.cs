@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Appl.Models.BusinessLayer.Data
+namespace Appl.Models.BusinessLayer.Structure
 {
     public struct Result
     {

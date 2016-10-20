@@ -1,6 +1,7 @@
 ﻿using Appl.Models.BusinessLayer;
 using Appl.Models.BusinessLayer.Account;
 using Appl.Models.BusinessLayer.Data;
+using Appl.Models.BusinessLayer.Structure;
 using Appl.Models.Interfaces;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -17,10 +18,12 @@ namespace Appl.Controllers
     public class TrainingController : Controller
     {
         private IData _currentData;
+        private IUpdates _updates;
 
         public TrainingController()
         {
             this._currentData = new Data();
+            this._updates = new Updates();
         }
 
         // GET: Training

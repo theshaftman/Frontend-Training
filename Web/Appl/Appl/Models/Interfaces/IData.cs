@@ -1,4 +1,5 @@
 ﻿using Appl.Models.BusinessLayer.Data;
+using Appl.Models.BusinessLayer.Structure;
 using RestSharp;
 using System;
 using System.Collections.Generic;

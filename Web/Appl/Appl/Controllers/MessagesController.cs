@@ -1,6 +1,7 @@
 ﻿using Appl.Models.BusinessLayer;
 using Appl.Models.BusinessLayer.Account;
 using Appl.Models.BusinessLayer.Data;
+using Appl.Models.BusinessLayer.Structure;
 using Appl.Models.Interfaces;
 using RestSharp;
 using System;

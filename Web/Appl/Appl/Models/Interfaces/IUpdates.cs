@@ -1,4 +1,5 @@
 ﻿using Appl.Models.BusinessLayer.Data;
+using Appl.Models.BusinessLayer.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,5 @@
 ﻿using Appl.Models.BusinessLayer.Account;
+using Appl.Models.BusinessLayer.Structure;
 using Appl.Models.Interfaces;
 using RestSharp;
 using System;

@@ -220,8 +220,8 @@
     <Compile Include="Models\BusinessLayer\Account\InputEncoding.cs" />
     <Compile Include="Models\BusinessLayer\Constant.cs" />
     <Compile Include="Models\BusinessLayer\Data\Data.cs" />
-    <Compile Include="Models\BusinessLayer\Data\Result.cs" />
-    <Compile Include="Models\BusinessLayer\Data\Update.cs" />
+    <Compile Include="Models\BusinessLayer\Structure\Result.cs" />
+    <Compile Include="Models\BusinessLayer\Structure\Update.cs" />
     <Compile Include="Models\BusinessLayer\Data\Updates.cs" />
     <Compile Include="Models\Interfaces\IData.cs" />
     <Compile Include="Models\Interfaces\IUpdates.cs" />
