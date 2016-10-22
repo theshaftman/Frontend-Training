@@ -70,7 +70,9 @@ namespace Appl.Controllers
         public ActionResult ModifySubjectData(FormCollection data)
         {
             string editID = data["editID"];
-            string subjectBody = data["subject_body"];
+            string author = data["author"];
+            string subjectTitle = data["subject_title"];
+            string subjectBody = data["subject_body"];            
 
             if (subjectBody.Contains("<script") ||
                 subjectBody.Contains("&lt;script"))
@@ -88,6 +90,11 @@ namespace Appl.Controllers
             {
                 currentStatus = "fail";
             }
+
+            string method = editID != null ? "modified" : "created";
+            string modification = string.Format("{0} \"{1}\"", method, subjectTitle);
+
+            bool modify = this._updates.UpdateInsertData(author, modification, subjectTitle);
 
             return Json(new 
             {

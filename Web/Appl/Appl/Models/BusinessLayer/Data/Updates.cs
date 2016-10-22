@@ -83,7 +83,7 @@ namespace Appl.Models.BusinessLayer.Data
             return result;
         }
 
-        bool IUpdates.UpdateInsertData(string username, string modification)
+        bool IUpdates.UpdateInsertData(string username, string modification, string link)
         {
             bool result = true;
 
@@ -110,7 +110,7 @@ namespace Appl.Models.BusinessLayer.Data
                     id = number.ToString(),
                     username = username,
                     modification = modification,
-
+                    link = link,
                     modificationDate = dateNow
                 };
 

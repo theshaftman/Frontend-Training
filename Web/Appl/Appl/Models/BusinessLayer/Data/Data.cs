@@ -224,13 +224,13 @@ namespace Appl.Models.BusinessLayer.Data
 
         IRestResponse IData.InsertModification(dynamic givenObject)
         {
-            string datatable = givenObject["datatable"];
-            string method = givenObject["method"];
-            string id = givenObject["id"];
-            string username = givenObject["username"];
-            string modification = givenObject["modification"];
-            string link = givenObject["link"];
-            string modificationDate = givenObject["modificationDate"];
+            string datatable = givenObject.datatable;
+            string method = givenObject.method;
+            string id = givenObject.id;
+            string username = givenObject.username;
+            string modification = givenObject.modification;
+            string link = givenObject.link;
+            DateTime modificationDate = givenObject.modificationDate;
 
             if (string.IsNullOrEmpty(datatable) ||
                 string.IsNullOrEmpty(method) ||
@@ -250,7 +250,7 @@ namespace Appl.Models.BusinessLayer.Data
             request.AddHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001");
 
             string[] inputNames = new string[] { "id", "username", "modification", "link", "modificationDate" };
-            string[] inputParameteres = new string[] { id, username, modification, link, modificationDate };
+            dynamic[] inputParameteres = new dynamic[] { id, username, modification, link, modificationDate };
 
             string parameter = GetPostMethod(inputNames, inputParameteres);
 
@@ -274,7 +274,7 @@ namespace Appl.Models.BusinessLayer.Data
         /// <param name="inputNames"></param>
         /// <param name="inputParameters"></param>
         /// <returns></returns>
-        private string GetPostMethod(string[] inputNames, string[] inputParameters)
+        private string GetPostMethod(string[] inputNames, dynamic[] inputParameters)
         {
             if (inputNames.Length != inputParameters.Length)
             {

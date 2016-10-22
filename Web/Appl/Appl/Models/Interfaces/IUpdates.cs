@@ -15,6 +15,6 @@ namespace Appl.Models.Interfaces
 
         bool UpdateCurrentData(string username);
 
-        bool UpdateInsertData(string username, string modification);
+        bool UpdateInsertData(string username, string modification, string link);
     }
 }
