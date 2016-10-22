@@ -37,9 +37,17 @@ namespace Appl.Models.BusinessLayer.Data
 
             for (int i = 0; i < routesResultList.Length; i++)
             {
+                string user = routesResultList[i]["username"].ToString();
+
+                // Exclude the username which modifies the updates.
+                if (user == username)
+                {
+                    continue;
+                }
+
                 Update item = new Update()
                 {
-                    Username = routesResultList[i]["username"],
+                    Username = user,
                     Modification = routesResultList[i]["modification"],
                     Link = routesResultList[i]["link"]
                 };
