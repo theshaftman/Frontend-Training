@@ -14,5 +14,7 @@ namespace Appl.Models.Interfaces
         IList<Update> GetCurrentUpdates(string username);
 
         bool UpdateCurrentData(string username);
+
+        bool UpdateInsertData(string username, string modification);
     }
 }

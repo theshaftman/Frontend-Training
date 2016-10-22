@@ -82,5 +82,46 @@ namespace Appl.Models.BusinessLayer.Data
             
             return result;
         }
+
+        bool IUpdates.UpdateInsertData(string username, string modification)
+        {
+            bool result = true;
+
+            try
+            {
+                // Get the latest id number.
+                Result updatesData = this._data.GetData("userModification", "?query={}&sort={\"id\": -1}&limit=1");
+
+                JavaScriptSerializer jsonResultSerializer = new JavaScriptSerializer();
+                dynamic routesResultList = jsonResultSerializer.DeserializeObject(updatesData.Data);
+                string updateNumber = routesResultList[0]["id"].ToString();
+
+                int number = int.Parse(updateNumber);
+                number += 1;
+                
+                // Get the date in the moment.
+                DateTime dateNow = DateTime.Now;
+
+                // Create the dynamic obect.
+                dynamic currentObject = new 
+                {
+                    datatable = "userModification",
+                    method = "post",
+                    id = number.ToString(),
+                    username = username,
+                    modification = modification,
+
+                    modificationDate = dateNow
+                };
+
+                IRestResponse modificationRequest = this._data.InsertModification(currentObject);
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 }

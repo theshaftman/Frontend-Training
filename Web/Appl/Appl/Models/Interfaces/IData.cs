@@ -22,5 +22,7 @@ namespace Appl.Models.Interfaces
         IRestResponse SendQuestion(FormCollection data);
 
         IRestResponse ModifyUpdate(string username, string modificationID, string updateNumber);
+
+        IRestResponse InsertModification(dynamic givenObject);
     }
 }
