@@ -319,9 +319,11 @@ $(window).on("load", function () {
                 "url": urlForm["currentServer"] + "/Training/DataDelete",
                 "type": "POST",
                 "data": {
+                    author: urlForm["currentUsername"],
                     givenData: "subjects",
                     id: item["_id"],
-                    currentId: item["id"]
+                    currentId: item["id"],
+                    deleteHeader: item["subject_title"]
                 }
             }
 

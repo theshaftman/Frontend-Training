@@ -91,7 +91,7 @@ namespace Appl.Controllers
                 currentStatus = "fail";
             }
 
-            string method = editID != null ? "modified" : "created";
+            string method = editID != null ? "Modified" : "Created";
             string modification = string.Format("{0} \"{1}\"", method, subjectTitle);
 
             bool modify = this._updates.UpdateInsertData(author, modification, subjectTitle);
@@ -135,6 +135,23 @@ namespace Appl.Controllers
             {
                 var item = this._currentData.Delete("subjectComments", list[i]);
             }
+
+            // Update the modifications.
+            string author = collection["author"];
+            string subjectTitle = collection["deleteHeader"];
+            string modification = string.Format("Deleted \"{0}\"", subjectTitle);
+
+            if (string.IsNullOrEmpty(author) ||
+                string.IsNullOrEmpty(subjectTitle) ||
+                string.IsNullOrEmpty(modification))
+            {
+                return Json(new
+                {
+                    status = "fail"
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            bool modify = this._updates.UpdateInsertData(author, modification, subjectTitle);
 
             JsonResult result = Json(new
             {
