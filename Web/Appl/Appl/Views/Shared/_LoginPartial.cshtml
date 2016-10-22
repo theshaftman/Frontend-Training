@@ -4,18 +4,24 @@
     {
         @Html.AntiForgeryToken()
 
+        <!-- Single button -->
         <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a id="updatesInformation" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-comment"></i></a>
+                <ul id="updatesInformationList" class="dropdown-menu">
+                </ul>
+            </li>
             <li>
                 <label class="usernameLabel">Hi '@ViewBag.Username'!</label>
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+        }
+        }
+        else
+        {
+        <ul class="nav navbar-nav navbar-right">
+            @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+        }

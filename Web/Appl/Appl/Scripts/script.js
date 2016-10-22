@@ -51,6 +51,69 @@ window.onload = function () {
             "font": "15px arial, sans-serif"
         });
     }, 1);
+
+    // Load updates
+    function loadUpdates() {
+        getUpdates()
+            .done(function (response) {
+                var updates = response.modificationsData,
+                    updatesList,
+                    updateLink,
+                    li,
+                    link,
+                    currentText,
+                    authorHeader,
+                    authorHeaderText;
+
+                if (updates.length > 0) {
+                    updatesList = document.getElementById("updatesInformationList");
+                    updatesList.innerHTML = "";
+
+                    updateLink = document.getElementById("updatesInformation");
+                    updateLink.style.color = "#c95a5a";
+                    
+                    for (var i = 0; i < updates.length; i++) {
+                        li = document.createElement("LI");
+                        link = document.createElement("A");
+                        link.setAttribute("href", "#");
+
+                        authorHeader = document.createElement("H4");
+                        authorHeaderText = document.createTextNode(updates[i]["Username"]);
+                        authorHeader.appendChild(authorHeaderText);
+
+                        currentText = document.createTextNode(updates[i]["Modification"]);
+
+                        link.appendChild(authorHeader);
+                        link.appendChild(currentText);
+                        li.appendChild(link);
+
+                        updatesList.appendChild(li);
+                    }
+                }
+            });
+    }
+
+    var updates = document.getElementById("updatesInformation");
+    updates.addEventListener("click", updatesOnClick, false);
+
+    function updatesOnClick(e) {
+        e.preventDefault();
+        $.ajax({
+            "url": window.location.origin + "/Updates/Update",
+            "type": "POST"
+        }).done(function (response) {
+            document.getElementById("updatesInformation").removeAttribute("style");
+        });
+    }
+    
+    function getUpdates() {
+        return $.ajax({
+            "url": window.location.origin + "/Updates/GetUpdates",
+            "type": "GET"
+        });
+    }
+
+    loadUpdates();
     
 }
 

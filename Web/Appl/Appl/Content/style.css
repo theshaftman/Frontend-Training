@@ -2,6 +2,11 @@
     background-color: #e6e6e6;
 }
 
+/*Update information size*/
+#updatesInformation i {
+    font-size: 17px!important;
+}
+
 #webFooter {
     font: 15px arial, sans-serif!important;
 }
