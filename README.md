@@ -1,6 +1,6 @@
 # Frontend-Training
 
-Over here you could find a front end .NET project.
+Over here you could find a front end .NET MVC project.
 
  **Availabilities**
 -
