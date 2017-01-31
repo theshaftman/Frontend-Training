@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appl", "Appl\Appl.csproj", "{7224EFEF-F804-4FB6-8532-0D73F972471E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetAppl", "GetAppl\GetAppl.csproj", "{4E726C90-7D46-4CCA-816E-6B8438FEB99D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewAppl", "NewAppl\NewAppl.csproj", "{217B8B7A-ADBE-43EA-AF0F-202D314077C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4E726C90-7D46-4CCA-816E-6B8438FEB99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E726C90-7D46-4CCA-816E-6B8438FEB99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E726C90-7D46-4CCA-816E-6B8438FEB99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217B8B7A-ADBE-43EA-AF0F-202D314077C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217B8B7A-ADBE-43EA-AF0F-202D314077C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217B8B7A-ADBE-43EA-AF0F-202D314077C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217B8B7A-ADBE-43EA-AF0F-202D314077C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
