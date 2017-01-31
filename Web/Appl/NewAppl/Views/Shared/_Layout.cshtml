@@ -1,17 +1,21 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>_Layout</title>
+    <title>@ViewBag.Title</title>
+    <link href="~/Styles/style.css" rel="stylesheet" type="text/css" />    
+    @RenderSection("styles")
 </head>
 <body>
-    <div>
+    <div id="main">
+        @RenderBody()
     </div>
+    <div id="footer">
+        &copy; @DateTime.Now.Year - All rights reserved.
+    </div>
+    @RenderSection("scripts")
 </body>
 </html>
