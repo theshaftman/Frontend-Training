@@ -139,6 +139,20 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Styles\Plugin\CSS\bootstrap.css" />
+    <Content Include="Styles\Plugin\CSS\bootstrap.min.css" />
+    <Content Include="Styles\Plugin\CSS\business-casual.css" />
+    <Content Include="Styles\Plugin\CSS\googleapis01.css" />
+    <Content Include="Styles\Plugin\CSS\googleapis02.css" />
+    <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\Plugin\Img\bg.jpg" />
+    <Content Include="Styles\Plugin\Img\intro-pic.jpg" />
+    <Content Include="Styles\Plugin\Img\slide-1.jpg" />
+    <Content Include="Styles\Plugin\Img\slide-2.jpg" />
+    <Content Include="Styles\Plugin\Img\slide-3.jpg" />
+    <Content Include="Styles\Plugin\style.css" />
+    <Content Include="Styles\Plugin\style01.css" />
+    <Content Include="Styles\Plugin\style02.css" />
     <Content Include="Styles\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -152,6 +166,10 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

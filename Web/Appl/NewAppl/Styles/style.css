@@ -1,2 +1,9 @@
-﻿body {
+﻿#nav_menu-4 {
+    margin-top: 40px;
+}
+
+#footer p {
+    text-align: center;
+    padding: 60px;
+    background-color: #eee;
 }

@@ -6,15 +6,79 @@
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link href="~/Styles/style.css" rel="stylesheet" type="text/css" />    
+
+
+    <style type="text/css">
+        img.wp-smiley,
+        img.emoji {
+            display: inline !important;
+            border: none !important;
+            box-shadow: none !important;
+            height: 1em !important;
+            width: 1em !important;
+            margin: 0 .07em !important;
+            vertical-align: -0.1em !important;
+            background: none !important;
+            padding: 0 !important;
+        }
+    </style>
+
+    <link href="~/Styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/Plugin/style01.css" rel="stylesheet" />
+    <link href="~/Styles/Plugin/style02.css" rel="stylesheet" />
+
+    <link href="~/Styles/Plugin/style.css" rel="stylesheet" />
     @RenderSection("styles")
 </head>
 <body>
-    <div id="main">
-        @RenderBody()
-    </div>
-    <div id="footer">
-        &copy; @DateTime.Now.Year - All rights reserved.
+    <div class="site-container">
+        <header class="site-header" itemscope="" itemtype="http://schema.org/WPHeader">
+            <div class="wrap">
+                <div class="title-area">
+                    <h1 class="site-title" itemprop="headline">
+                        <a href="#">Chubbycheek</a>
+                    </h1>
+                </div>
+                <div class="widget-area header-widget-area">
+                    <h2 class="genesis-sidebar-title screen-reader-text">Header Right</h2>
+                    @*<section id="search-8" class="widget-1 widget-first widget-odd widget widget_search">
+                            <div class="widget-1 widget-first widget-odd widget-wrap">
+                                <form class="search-form" itemprop="potentialAction" itemscope="" itemtype="http://schema.org/SearchAction" method="get" action="http://www.thefullhelping.com/" role="search">
+                                    <meta itemprop="target" content="http://www.thefullhelping.com/?s={s}">
+                                    <label class="search-form-label screen-reader-text" for="searchform-5890ce60e5580"></label>
+                                    <input itemprop="query-input" type="search" name="s" id="searchform-5890ce60e5580" placeholder="">
+                                    <input type="submit" value="">
+                                </form>
+                            </div>
+                        </section>*@
+                    @*<section id="simple-social-icons-2" class="widget-2 widget-even widget simple-social-icons"><div class="widget-2 widget-even widget-wrap"><ul class="aligncenter"><li class="ssi-facebook"><a href="https://www.facebook.com/TheFullHelping/" target="_blank"><svg role="img" class="social-facebook" aria-labelledby="social-facebook"><title id="social-facebook">Facebook</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-facebook"></use></svg></a></li><li class="ssi-instagram"><a href="https://www.instagram.com/thefullhelping/" target="_blank"><svg role="img" class="social-instagram" aria-labelledby="social-instagram"><title id="social-instagram">Instagram</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-instagram"></use></svg></a></li><li class="ssi-pinterest"><a href="https://www.pinterest.com/thefullhelping/" target="_blank"><svg role="img" class="social-pinterest" aria-labelledby="social-pinterest"><title id="social-pinterest">Pinterest</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-pinterest"></use></svg></a></li><li class="ssi-twitter"><a href="https://twitter.com/thefullhelping" target="_blank"><svg role="img" class="social-twitter" aria-labelledby="social-twitter"><title id="social-twitter">Twitter</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-twitter"></use></svg></a></li></ul></div></section>*@
+                    <section id="nav_menu-4" class="widget-3 widget-last widget-odd widget widget_nav_menu">
+                        <div class="widget-3 widget-last widget-odd widget-wrap">
+                            <div class="menu-toggle"><span></span></div><nav class="nav-header" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+                                <ul id="menu-main" class="menu genesis-nav-menu">
+                                    <li id="menu-item-12010" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-12010"><a href="#" itemprop="url"><span itemprop="name">Начало</span></a></li>
+                                    <li id="menu-item-12015" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12015"><a href="#" itemprop="url"><span itemprop="name">Рецепти</span></a></li>
+                                    <li id="menu-item-12019" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12019 menu-item-hover"><a href="#" itemprop="url"><span itemprop="name">Повече информация</span></a></li>
+                                    <li id="menu-item-12014" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12014"><a href="#" itemprop="url"><span itemprop="name">Контакт</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </header>
+        <div class="site-inner">
+            @RenderBody()
+        </div>
+        <div id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p>&copy; @DateTime.Now.Year - All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @RenderSection("scripts")
 </body>
