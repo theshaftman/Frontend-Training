@@ -148,7 +148,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecipesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +215,9 @@
     <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Recipes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
