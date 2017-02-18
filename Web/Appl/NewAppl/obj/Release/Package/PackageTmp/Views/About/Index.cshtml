@@ -13,30 +13,33 @@
 }
 
 @section scripts {
+    <script src="~/Scripts/About/Service.js"></script>
+    <script src="~/Scripts/About/ViewModel.js"></script>
+    <script src="~/Scripts/About/Controller.js"></script>
 
+    <script src="~/Scripts/script.js"></script>
 }
 <div class="content-sidebar-wrap">
     <article class="post-15 page type-page status-publish entry" itemscope="" itemtype="http://schema.org/CreativeWork">
         <header class="entry-header"></header><div class="entry-content" itemprop="text">
-            <div class="two-thirds first">
-                <h2>Welcome to The Full Helping</h2>
-                <p>I’m so glad you’re here. Whether you’re looking to explore a vegan lifestyle, searching for plant-based recipes, or hoping to develop a more compassionate relationship with food, it’s my hope that this blog will have something to offer you.</p>
-                <p>Eating can be complicated, especially in this day and age. We’re all hoping to eat responsibly, healthfully, and well, but alarmism, mixed messages, and impossible standards often stand in our way. My goal in bringing you The Full Helping is to help you love your body through the experience of nourishing, plant-based food. Here you’ll find recipes that are focused on both pleasure and wellness, along with occasional musings on nutrition, self-care, and mindful living. </p>
-                <p>I believe that when we satisfy our appetites, the fullness of our lives expands. This blog is my tribute to that process.</p>
-                <p>
-                    The healing starts here. Help yourself.
-                </p>
+            <div id="information">
+                <div class="two-thirds first">
+                    <h2><span id="blogInformationTitle"></span></h2>
+                    <span id="blogInformation"></span>
+                </div>
+                <div class="one-third">
+                    <img src="http://www.thefullhelping.com/wp-content/uploads/2016/10/cropped-TheFullHelping_FAVICON.png">
+                </div>
             </div>
-            <div class="one-third"><img src="http://www.thefullhelping.com/wp-content/uploads/2016/10/cropped-TheFullHelping_FAVICON.png" alt="cropped-TheFullHelping_FAVICON.png" width="512" height="512" class="alignnone size-full wp-image-32390" style="margin-top: -20px;" srcset="http://www.thefullhelping.com/wp-content/uploads/2016/10/cropped-TheFullHelping_FAVICON.png 512w, http://www.thefullhelping.com/wp-content/uploads/2016/10/cropped-TheFullHelping_FAVICON-150x150.png 150w, http://www.thefullhelping.com/wp-content/uploads/2016/10/cropped-TheFullHelping_FAVICON-300x301.png 300w" sizes="(max-width: 512px) 100vw, 512px"></div>
-            <div class="clear"></div>
             <hr>
-            <div class="one-half first">
-                <img src="http://www.thefullhelping.com/wp-content/uploads/2009/03/Gena-Hamshaw-by-James-Ransom-Blog.jpg" alt="Gena Hamshaw by James Ransom Blog" width="600" height="750" class="alignnone size-full wp-image-28367" srcset="http://www.thefullhelping.com/wp-content/uploads/2009/03/Gena-Hamshaw-by-James-Ransom-Blog.jpg 600w, http://www.thefullhelping.com/wp-content/uploads/2009/03/Gena-Hamshaw-by-James-Ransom-Blog-240x300.jpg 240w" sizes="(max-width: 600px) 100vw, 600px"><a href="http://www.thefullhelping.com/nutrition-counseling/">
-            </div>
-            <div id="AdThrive_Content_1_desktop" class="adthrive-ad adthrive-dynamic adthrive-content" data-google-query-id="CLW96bXH79ECFUiEGQodik4K-w"><div id="google_ads_iframe_18190176/AdThrive_Content_1_0__container__" style="border: 0pt none; display: inline-block; width: 300px; height: 250px;"><iframe frameborder="0" src="http://tpc.googlesyndication.com/safeframe/1-0-5/html/container.html#xpc=sf-gdn-exp-1&amp;p=http%3A//www.thefullhelping.com" id="google_ads_iframe_18190176/AdThrive_Content_1_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="300" height="250" data-is-safeframe="true" sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-pointer-lock allow-popups-to-escape-sandbox" style="border: 0px; vertical-align: bottom;"></iframe></div></div>
-            <div class="one-half">
-                <h2>За Гена (Това съм аз!)</h2>
-                <p>Здравейте, аз съм Гена :)</p>
+            <div id="phillipa">
+                <div class="one-half first">
+                    <img id="myInformationPicture" src="" width="500">
+                </div>
+                <div class="one-half">
+                    <h2><span id="myInformationTitle"></span></h2>
+                    <p><span id="myInformation"></span></p>
+                </div>
             </div>
         </div>
     </article>

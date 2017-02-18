@@ -27,7 +27,19 @@ namespace NewAppl.Controllers
         [HttpGet]
         public ActionResult GetInformation()
         {
-            Result data = this._model.GetData("myInformation");
+            Result data = this._model.GetData("information");
+            JsonResult result = Json(new
+            {
+                data = data.Data,
+                status = data.Status
+            }, JsonRequestBehavior.AllowGet);
+            return result;
+        }
+
+        [HttpGet]
+        public ActionResult GetFiles()
+        {
+            Result data = this._model.GetFiles();
             JsonResult result = Json(new
             {
                 data = data.Data,

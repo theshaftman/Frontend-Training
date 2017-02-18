@@ -9,5 +9,7 @@ namespace NewAppl.Models.Interfaces
     internal interface IDatabaseModel
     {
         Result GetData(string url);
+
+        Result GetFiles(string data = "");
     }
 }
