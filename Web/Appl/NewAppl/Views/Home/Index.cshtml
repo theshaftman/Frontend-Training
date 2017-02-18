@@ -5,15 +5,15 @@
 
 @section styles {
     <style type="text/css">
-        #main {
+        /*#main {
             padding: 30px;
-            background-color: #68A225;
-            background: red; /* For browsers that do not support gradients */
-            background: -webkit-linear-gradient(right, #68A225, white); /* For Safari 5.1 to 6.0 */
-            background: -o-linear-gradient(right, #68A225, white); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient(right, #68A225, white); /* For Firefox 3.6 to 15 */
-            background: linear-gradient(to right, #68A225, white);
-        }
+            background-color: #A7C980;
+            background: red;
+            background: -webkit-linear-gradient(right, #A7C980, white);
+            background: -o-linear-gradient(right, #A7C980, white);
+            background: -moz-linear-gradient(right, #A7C980, white);
+            background: linear-gradient(to right, #A7C980, white);
+        }*/
 
         .more-link {
             background-color: #B3DE81;
@@ -28,7 +28,11 @@
 }
 
 @section scripts {
+    <script src="~/Scripts/Home/Service.js"></script>
+    <script src="~/Scripts/Home/ViewModel.js"></script>
+    <script src="~/Scripts/Home/Controller.js"></script>
 
+    <script src="~/Scripts/script.js"></script>
 }
 <div class="home-top">
     <section id="soliloquy-2" class="widget-1 widget-first widget-last widget-odd widget soliloquy">
@@ -95,12 +99,14 @@
         <section id="user-profile-2" class="widget-1 widget-first widget-odd widget user-profile">
             <div class="widget-1 widget-first widget-odd widget-wrap">
                 <h3 class="widgettitle widget-title">Привет</h3>
-                <p>
-                    <span class="alignright">
-                        <img alt="" src="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=125&amp;d=identicon&amp;r=g" srcset="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=250&amp;d=identicon&amp;r=g 2x" class="avatar avatar-125 photo" height="125" width="125">
-                    </span>
-                    Здравей, аз съм Гена...
-                </p>
+                <a href="~/About#philipa">
+                    <p>
+                        <span class="alignright">
+                            <img alt="" src="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=125&amp;d=identicon&amp;r=g" srcset="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=250&amp;d=identicon&amp;r=g 2x" class="avatar avatar-125 photo" height="125" width="125">
+                        </span>
+                        <span id="myInformation"></span>
+                    </p>
+                </a>
             </div>
         </section>
     </div>

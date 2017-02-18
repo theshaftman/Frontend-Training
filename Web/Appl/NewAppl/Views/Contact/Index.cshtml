@@ -11,7 +11,11 @@
 }
 
 @section scripts {
+    <script src="~/Scripts/Contact/Service.js"></script>
+    <script src="~/Scripts/Contact/ViewModel.js"></script>
+    <script src="~/Scripts/Contact/Controller.js"></script>
 
+    <script src="~/Scripts/script.js"></script>
 }
 
 <div class="content-sidebar-wrap">
@@ -20,12 +24,14 @@
         <section id="user-profile-2" class="widget-1 widget-first widget-odd widget user-profile">
             <div class="widget-1 widget-first widget-odd widget-wrap">
                 <h3 class="widgettitle widget-title">Привет</h3>
-                <p>
-                    <span class="alignright">
-                        <img alt="" src="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=125&amp;d=identicon&amp;r=g" srcset="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=250&amp;d=identicon&amp;r=g 2x" class="avatar avatar-125 photo" height="125" width="125">
-                    </span>
-                    Здравей, аз съм Гена...
-                </p>
+                <a href="~/About#philipa">
+                    <p>
+                        <span class="alignright">
+                            <img alt="" src="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=125&amp;d=identicon&amp;r=g" srcset="http://0.gravatar.com/avatar/02003909bd1462353521b9a71f10dc29?s=250&amp;d=identicon&amp;r=g 2x" class="avatar avatar-125 photo" height="125" width="125">
+                        </span>
+                        <span id="myInformation"></span>
+                    </p>
+                </a>
             </div>
         </section>
     </div>
@@ -58,7 +64,7 @@
                         </p>
                         <div class="wpcf7-response-output wpcf7-display-none"></div>
                     </form>
-                </div>                
+                </div>
             </div>
         </article>
     </main>

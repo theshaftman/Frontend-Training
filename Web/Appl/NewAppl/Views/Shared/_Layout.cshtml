@@ -22,7 +22,21 @@
         }
 
         body {
-            background-color: #FDFFFF!important;
+            background-color: #FDFFFF !important;
+        }
+
+        #aside {
+            margin-left: 20px;
+        }
+
+        #user-profile-2 div p {
+            max-height: 290px;
+            overflow: hidden;
+            white-space: normal;
+        }
+
+        div {
+            text-align: justify;
         }
     </style>
 
@@ -34,6 +48,12 @@
     <link href="~/Styles/style.css" rel="stylesheet" />
     @RenderSection("styles")
     <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+    <script type="text/javascript">
+        var Service = {};
+        var ViewModel = {};
+        var Controller = {};
+    </script>
 </head>
 <body>
     <div class="site-container">
@@ -59,12 +79,15 @@
                     @*<section id="simple-social-icons-2" class="widget-2 widget-even widget simple-social-icons"><div class="widget-2 widget-even widget-wrap"><ul class="aligncenter"><li class="ssi-facebook"><a href="https://www.facebook.com/TheFullHelping/" target="_blank"><svg role="img" class="social-facebook" aria-labelledby="social-facebook"><title id="social-facebook">Facebook</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-facebook"></use></svg></a></li><li class="ssi-instagram"><a href="https://www.instagram.com/thefullhelping/" target="_blank"><svg role="img" class="social-instagram" aria-labelledby="social-instagram"><title id="social-instagram">Instagram</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-instagram"></use></svg></a></li><li class="ssi-pinterest"><a href="https://www.pinterest.com/thefullhelping/" target="_blank"><svg role="img" class="social-pinterest" aria-labelledby="social-pinterest"><title id="social-pinterest">Pinterest</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-pinterest"></use></svg></a></li><li class="ssi-twitter"><a href="https://twitter.com/thefullhelping" target="_blank"><svg role="img" class="social-twitter" aria-labelledby="social-twitter"><title id="social-twitter">Twitter</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-twitter"></use></svg></a></li></ul></div></section>*@
                     <section id="nav_menu-4" class="widget-3 widget-last widget-odd widget widget_nav_menu">
                         <div class="widget-3 widget-last widget-odd widget-wrap">
-                            <div class="menu-toggle"><span></span></div><nav class="nav-header" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+                            <div class="menu-toggle">
+                                <span></span>
+                            </div>
+                            <nav class="nav-header" itemscope="" itemtype="http://schema.org/SiteNavigationElement">
                                 <ul id="menu-main" class="menu genesis-nav-menu">
-                                    <li id="menu-item-12010" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-12010"><a href="/" itemprop="url"><span itemprop="name">Начало</span></a></li>
-                                    <li id="menu-item-12015" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12015"><a href="/Recipes" itemprop="url"><span itemprop="name">Рецепти</span></a></li>
-                                    <li id="menu-item-12019" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12019 menu-item-hover"><a href="/About" itemprop="url"><span itemprop="name">Повече информация</span></a></li>
-                                    <li id="menu-item-12014" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12014"><a href="/Contact" itemprop="url"><span itemprop="name">Контакт</span></a></li>
+                                    <li id="menu-item-home" class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-home menu-item-12010"><a href="/" itemprop="url"><span itemprop="name">Начало</span></a></li>
+                                    <li id="menu-item-recipes" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12015"><a href="/Recipes" itemprop="url"><span itemprop="name">Рецепти</span></a></li>
+                                    <li id="menu-item-about" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12019 menu-item-hover"><a href="/About" itemprop="url"><span itemprop="name">Повече информация</span></a></li>
+                                    <li id="menu-item-contact" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12014"><a href="/Contact" itemprop="url"><span itemprop="name">Контакт</span></a></li>
                                 </ul>
                             </nav>
                         </div>

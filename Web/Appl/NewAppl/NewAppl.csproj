@@ -184,15 +184,28 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\About\Controller.js" />
+    <Content Include="Scripts\About\Service.js" />
+    <Content Include="Scripts\About\ViewModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\chubbycheek - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\chubbycheek - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\Contact\Controller.js" />
+    <Content Include="Scripts\Contact\Service.js" />
+    <Content Include="Scripts\Contact\ViewModel.js" />
+    <Content Include="Scripts\Home\Controller.js" />
+    <Content Include="Scripts\Home\Service.js" />
+    <Content Include="Scripts\Home\ViewModel.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\Recipes\Controller.js" />
+    <Content Include="Scripts\Recipes\Service.js" />
+    <Content Include="Scripts\Recipes\ViewModel.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Styles\Plugin\CSS\bootstrap.css" />
     <Content Include="Styles\Plugin\CSS\bootstrap.min.css" />
     <Content Include="Styles\Plugin\CSS\business-casual.css" />
@@ -208,6 +221,9 @@
     <Content Include="Styles\Plugin\style01.css" />
     <Content Include="Styles\Plugin\style02.css" />
     <Content Include="Styles\style.css" />
+    <Content Include="Views\About\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -224,16 +240,11 @@
     <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Styles\Plugin\Fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Recipes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\About\" />
-    <Folder Include="Scripts\Contact\" />
-    <Folder Include="Scripts\Home\" />
-    <Folder Include="Scripts\Recipes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
