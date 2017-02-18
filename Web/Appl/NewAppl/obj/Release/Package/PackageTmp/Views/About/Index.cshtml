@@ -8,12 +8,15 @@
         .content-sidebar-wrap {
             margin-top: 100px;
         }
+
+        #information, #phillipa {
+            display: block;
+        }
     </style>
 
 }
 
 @section scripts {
-    <script src="~/Scripts/About/Service.js"></script>
     <script src="~/Scripts/About/ViewModel.js"></script>
     <script src="~/Scripts/About/Controller.js"></script>
 
@@ -21,14 +24,15 @@
 }
 <div class="content-sidebar-wrap">
     <article class="post-15 page type-page status-publish entry" itemscope="" itemtype="http://schema.org/CreativeWork">
-        <header class="entry-header"></header><div class="entry-content" itemprop="text">
+        <header class="entry-header"></header>
+        <div class="entry-content" itemprop="text">
             <div id="information">
                 <div class="two-thirds first">
                     <h2><span id="blogInformationTitle"></span></h2>
                     <span id="blogInformation"></span>
                 </div>
                 <div class="one-third">
-                    <img src="http://www.thefullhelping.com/wp-content/uploads/2016/10/cropped-TheFullHelping_FAVICON.png">
+                    <img id="blogInformationPicture" src="http://www.thefullhelping.com/wp-content/uploads/2016/10/cropped-TheFullHelping_FAVICON.png">
                 </div>
             </div>
             <hr>

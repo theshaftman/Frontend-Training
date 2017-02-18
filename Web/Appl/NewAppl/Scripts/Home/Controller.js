@@ -3,7 +3,7 @@
     var model = new ViewModel.Home();
 
     self.init = function () {
-        model.loadInformation();
+        model.loadPage();
     }
 
     return {

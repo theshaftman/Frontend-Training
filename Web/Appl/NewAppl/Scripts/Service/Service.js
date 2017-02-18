@@ -1,11 +1,12 @@
 ﻿Service = (function () {
     var self = this;
 
-    self.getData = function (url) {
+    self.getData = function (url, data) {
         var settings = {
             type: "GET",
             url: window.location.origin + url,
-            dataType: "json"
+            dataType: "json",
+            data: data
         };
 
         return $.ajax(settings);
