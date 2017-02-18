@@ -54,6 +54,10 @@
         var ViewModel = {};
         var Controller = {};
     </script>
+
+    <script src="~/Scripts/Service/Service.js"></script>
+    <script src="~/Scripts/Service/ViewModel.js"></script>
+    <script src="~/Scripts/Service/Controller.js"></script>
 </head>
 <body>
     <div class="site-container">
@@ -108,6 +112,10 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        Controller.init();
+    </script>
     @RenderSection("scripts")
 </body>
 </html>
