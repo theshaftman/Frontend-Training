@@ -52,5 +52,13 @@ namespace NewAppl.Controllers
 
             return result;
         }
+
+        public ActionResult Recipe(string id)
+        {
+            ViewBag.Id = id;
+            ViewData["Id"] = id;
+
+            return View();
+        }
     }
 }

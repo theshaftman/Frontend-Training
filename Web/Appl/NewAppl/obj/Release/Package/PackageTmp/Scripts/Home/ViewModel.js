@@ -10,6 +10,7 @@
             Service.getData("/About/GetFiles"))
             .done(function (responseA, responseB) {
                 if (responseA[0]["status"].toLowerCase() === "completed") {
+                    responseA[0]["data"] = responseA[0]["data"].replace(/\\n/g, "<br />");
                     self.currentData = JSON.parse(responseA[0]["data"]);
                     self.currentFiles = JSON.parse(responseB[0]["data"]);
                     for (var i = 0; i < self.currentData.length; i++) {
@@ -71,7 +72,7 @@
                         }
                     }, 0);
 
-                    console.log(self.currentData);
+                    // console.log(self.currentData);
                 }
             });
     }

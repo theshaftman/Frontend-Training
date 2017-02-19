@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Recipe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles {
+    <style type="text/css">
+        .required {
+            color: red;
+        }
+    </style>
+}
+@section scripts {
+    <script type="text/javascript">
+        window.onload = function () {
+            var currentId = '@this.ViewBag.Id';
+            var currentData;
+            Service.getData("/Recipes/GetRecipes", { query: "query={\"recipeId\":\"" + currentId + "\"}" })
+                .done(function (response) {
+                    response["data"] = response["data"].replace(/\\n/g, "<br />");
+                    currentData = JSON.parse(response["data"]);
+                    currentData = currentData[0];
+
+                    $("#entryTitle").text(currentData["recipeTitle"]);
+                    $("#entryText").html(currentData["recipe"]);
+                    $("#entryTime").text(currentData["dateLoaded"]);
+
+                    console.log(currentData)
+                });
+        }
+    </script>
+}
+<div class="content-sidebar-wrap">
+    <div id="aside" class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope="" id="genesis-sidebar-primary">
+        <h2 class="genesis-sidebar-title screen-reader-text">Primary Sidebar</h2>
+        <section id="user-profile-2" class="widget-1 widget-first widget-odd widget user-profile">
+            <div class="widget-1 widget-first widget-odd widget-wrap">
+                <h3 id="myInformationTitle" class="widgettitle widget-title"></h3>
+                <a href="~/About#phillipa">
+                    <p>
+                        <span class="alignright">
+                            <img id="myInformationPicture" alt="" src="" class="avatar avatar-125 photo" height="125" width="125">
+                        </span>
+                        <span id="myInformation"></span>
+                    </p>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <main class="content" id="genesis-content">
+        <article class="category-food-and-healing category-gluten-free category-main-dishes tag-chili tag-cookbook tag-review tag-winter entry" itemscope="" itemtype="http://schema.org/CreativeWork">
+            <header class="entry-header">
+                <h1 id="entryTitle" class="entry-title" itemprop="headline"></h1>
+            </header>
+            <p class="entry-meta">
+                <span class="heart-this-wrap">
+                    <a href="#" class="heart-this" id="heart-this-58a953e1a8f4e" data-post-id="33295"><span>0</span></a>
+                </span>
+                <time id="entryTime" class="entry-time" itemprop="datePublished"></time>
+                <!--
+                <span class="entry-categories">
+                    <a href="#" rel="category tag">Main Dishes</a>
+                </span>-->
+            </p>
+
+            <div class="entry-content jpibfi_container" itemprop="text">
+                <p style="text-align: center;">
+                    <img class="alignnone wp-image-33308 size-full" title="" src="" alt="Test" width="600" sizes="(max-width: 600px) 100vw, 600px" data-jpibfi-post-excerpt="">
+                </p>
+                <p id="entryText"></p>
+            </div>
+        </article>
+
+        <!-- #comment-## -->
+        <div class="entry-comments" id="comments">
+            <h3>Коментари</h3>
+            <ol class="comment-list">
+                <!--
+                <li class="comment even thread-even depth-1" id="comment-01">
+                    <article itemprop="comment" itemscope="" itemtype="http://schema.org/Comment">
+                        <header class="comment-header">
+                            <p class="comment-author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                                <span class="commentAuthor" style="color: #95b5ac;">Karlie
+                                </span>
+                                <span class="says">says</span>
+                            </p>
+                            <p class="comment-meta">
+                                <time class="commentTime" itemprop="datePublished">
+                                    January 27, 2017 at 2:12 pm
+                                </time>
+                            </p>
+                        </header>
+                        <div class="comment-content" itemprop="text">
+                            <p class="commentText">Soup and bread is healing to me!</p>
+                        </div>
+                    </article>
+                </li>
+                    -->
+            </ol>
+        </div>
+
+        <div id="respond" class="comment-respond">
+            <h3 id="reply-title" class="comment-reply-title">
+                Напишете коментар
+            </h3>
+            <form action="#" method="post" id="commentform" class="comment-form anti-spam-form-processed" novalidate="">
+                <p class="comment-notes">
+                    Задължителните полета са отбелязани с <span class="required">*</span>
+                </p><p class="comment-form-comment">
+                    <label for="comment">Коментар</label>
+                    <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea>
+                </p>
+                <p class="comment-form-author">
+                    <label for="author">
+                        Име <span class="required">*</span>
+                    </label>
+                    <input id="author" name="author" type="text" value="" size="30" maxlength="245" aria-required="true" required="required">
+                </p>
+                <p class="comment-form-email">
+                    <label for="email">
+                        Имейл
+                        <span class="required">*</span>
+                    </label>
+                    <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required">
+                </p>
+                <p class="form-submit">
+                    <span class="ERComment">
+                        <input name="submit" type="submit" id="submit" class="submit" value="Post Comment">
+                    </span>
+                </p>
+            </form>
+        </div><!-- #respond -->
+    </main>
+</div>
