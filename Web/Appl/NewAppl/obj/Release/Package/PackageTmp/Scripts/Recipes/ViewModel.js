@@ -18,9 +18,9 @@
                     self.currentData = JSON.parse(responseA[0]["data"]);
                     self.currentFiles = JSON.parse(responseB[0]["data"]);
 
-                    if (urlPath["query"].length > 0) {
+                    if (urlPath["query"] && urlPath["query"].length > 0) {
                         self.currentData = self.currentData.filter(function (obj) {
-                            return obj["recipeTitle"].indexOf(urlPath["query"]) != -1 ? obj : null;
+                            return obj["recipeTitle"].toLowerCase().indexOf(urlPath["query"].toLowerCase()) > -1 ? obj : null;
                         });
                     }
 
