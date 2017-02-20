@@ -20,7 +20,7 @@
 
                     if (urlPath["query"].length > 0) {
                         self.currentData = self.currentData.filter(function (obj) {
-                            return obj["recipeTitle"].indexOf(urlPath["query"]) != -1 ? obj : null;
+                            return obj["recipeTitle"].toLowerCase().indexOf(urlPath["query"].toLowerCase()) > -1 ? obj : null;
                         });
                     }
 
