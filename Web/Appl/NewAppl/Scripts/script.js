@@ -6,7 +6,12 @@
 
     switch (currentWindow) {
         case "Recipes":
-            Controller.Recipes.init();
+            if (window.location.pathname.length > 0 &&
+                    window.location.pathname.split("/").filter(function (a) { return a ? a.length > 0 : false; }).length > 1) {
+                Controller.Recipes.recipeInit();
+            } else {
+                Controller.Recipes.init();
+            }
             currentWebId = "recipes";
             break;
         case "About":

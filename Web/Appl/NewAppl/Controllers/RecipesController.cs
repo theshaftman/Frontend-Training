@@ -19,8 +19,11 @@ namespace NewAppl.Controllers
         }
 
         // GET: Recipes
-        public ActionResult Index()
+        public ActionResult Index(string query)
         {
+            this.ViewBag.Query = query;
+            this.ViewData["Query"] = query;
+
             return View();
         }
 

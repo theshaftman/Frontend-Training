@@ -6,7 +6,12 @@
         model.loadInformation();
     }
 
+    self.recipeInit = function () {
+        model.loadRecipeInformation();
+    }
+
     return {
-        init: self.init
+        init: self.init,
+        recipeInit: self.recipeInit
     }
 }());
