@@ -37,9 +37,11 @@ namespace NewAppl.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetFiles()
+        public ActionResult GetFiles(string query)
         {
-            Result data = this._model.GetFiles();
+            string addQuery = !string.IsNullOrEmpty(query) ? "?query={\"usage\":\"" + query + "\"}" : "";
+
+            Result data = this._model.GetFiles(addQuery);
             JsonResult result = Json(new
             {
                 data = data.Data,

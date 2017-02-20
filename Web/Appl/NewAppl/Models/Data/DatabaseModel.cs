@@ -35,7 +35,7 @@ namespace NewAppl.Models.Data
 
         Result IDatabaseModel.GetFiles(string data = "")
         {
-            var client = new RestClient("https://baas.kinvey.com/blob/kid_S1lQExb_e/" + data);
+            var client = new RestClient("https://baas.kinvey.com/blob/kid_S1lQExb_e" + data);
             var request = new RestRequest(Method.GET);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("authorization", "Basic a2lkX1MxbFFFeGJfZTpiMDZmNWYyNzk2ZDc0ZDY1YjdkODA1NGJiODcxYjk4NQ==");

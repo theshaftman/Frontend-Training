@@ -11,23 +11,15 @@
 }
 @section scripts {
     <script type="text/javascript">
-        window.onload = function () {
-            var currentId = '@this.ViewBag.Id';
-            var currentData;
-            Service.getData("/Recipes/GetRecipes", { query: "query={\"recipeId\":\"" + currentId + "\"}" })
-                .done(function (response) {
-                    response["data"] = response["data"].replace(/\\n/g, "<br />");
-                    currentData = JSON.parse(response["data"]);
-                    currentData = currentData[0];
-
-                    $("#entryTitle").text(currentData["recipeTitle"]);
-                    $("#entryText").html(currentData["recipe"]);
-                    $("#entryTime").text(currentData["dateLoaded"]);
-
-                    console.log(currentData)
-                });
-        }
+        var urlPath = {
+            currentId: '@this.ViewBag.Id'
+        };
     </script>
+
+    <script src="~/Scripts/Recipes/ViewModel.js"></script>
+    <script src="~/Scripts/Recipes/Controller.js"></script>
+
+    <script src="~/Scripts/script.js"></script>
 }
 <div class="content-sidebar-wrap">
     <div id="aside" class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope="" id="genesis-sidebar-primary">
@@ -65,7 +57,7 @@
 
             <div class="entry-content jpibfi_container" itemprop="text">
                 <p style="text-align: center;">
-                    <img class="alignnone wp-image-33308 size-full" title="" src="" alt="Test" width="600" sizes="(max-width: 600px) 100vw, 600px" data-jpibfi-post-excerpt="">
+                    <img id="entryPicture" class="alignnone wp-image-33308 size-full" title="" src="" alt="Test" width="600" sizes="(max-width: 600px) 100vw, 600px" data-jpibfi-post-excerpt="">
                 </p>
                 <p id="entryText"></p>
             </div>
