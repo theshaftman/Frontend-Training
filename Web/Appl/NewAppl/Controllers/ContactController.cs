@@ -28,12 +28,8 @@ namespace NewAppl.Controllers
         public ActionResult SendMail(FormCollection model)
         {
             Result sendMail = this._model.SendMail(model);
-            JsonResult result = Json(new 
-            {
-                data = sendMail.Data,
-                status = sendMail.Status
-            }, JsonRequestBehavior.AllowGet);
-            return result;
+
+            return RedirectToAction("Index", "Contact", new { data = sendMail.Data, status = sendMail.Status });
         }
     }
 }

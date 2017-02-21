@@ -19,14 +19,22 @@ namespace NewAppl.Models.Data
 
         Result IEmailModel.SendMail(FormCollection model)
         {
-            string name = "Mariyan";
-            string subject = "Тестови имейл";
-            string body = "Здравей, изпращам ти тестови имейл :)\nTest";
+            string name = model["userName"];
+            string subject = model["userEmail"];
+            string body = model["userMessage"];
+            Result result = new Result();
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(subject) || 
+                string.IsNullOrEmpty(body))
+            {
+                result.Data = "You have empty fields! Please fill them!";
+                result.Status = "fail";
+                return result;
+            }
 
             var fromAddress = new MailAddress(Constant.FROM_EMAIL, name);
             var toAddress = new MailAddress(Constant.TO_EMAIL, Constant.TO_NAME);
             const string fromPassword = Constant.PASSWORD;
-            Result result = new Result();
 
             var smtp = new SmtpClient
             {
