@@ -11,6 +11,13 @@
 }
 
 @section scripts {
+    <script type="text/javascript">
+        var urlData = {
+            data: '@this.ViewBag.Data',
+            status: '@this.ViewBag.Status'
+        };
+    </script>
+
     <script src="~/Scripts/Contact/ViewModel.js"></script>
     <script src="~/Scripts/Contact/Controller.js"></script>
 

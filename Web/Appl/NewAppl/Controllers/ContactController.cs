@@ -19,8 +19,11 @@ namespace NewAppl.Controllers
         }
 
         // GET: Contact
-        public ActionResult Index()
+        public ActionResult Index(string data, string status)
         {
+            this.ViewBag.Data = data;
+            this.ViewBag.Status = status;
+
             return View();
         }
 

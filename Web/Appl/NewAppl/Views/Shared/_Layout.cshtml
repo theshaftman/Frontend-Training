@@ -39,6 +39,8 @@
             text-align: justify;
         }
     </style>
+    
+    <link href="~/Styles/Plugin/CSS/bootstrap.min.css" rel="stylesheet" />
 
     <link href="~/Styles/Plugin/style01.css" rel="stylesheet" />
     <link href="~/Styles/Plugin/style02.css" rel="stylesheet" />
@@ -46,8 +48,9 @@
 
     <link href="~/Styles/Plugin/style.css" rel="stylesheet" />
     <link href="~/Styles/style.css" rel="stylesheet" />
-    @RenderSection("styles")
+    @RenderSection("styles", required: false)
     <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
 
     <script type="text/javascript">
         var Service = {};
@@ -112,10 +115,10 @@
             </div>
         </div>
     </div>
-
+    @Html.Partial("_Modal")
     <script type="text/javascript">
         Controller.init();
     </script>
-    @RenderSection("scripts")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
