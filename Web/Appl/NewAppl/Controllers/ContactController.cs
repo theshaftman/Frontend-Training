@@ -19,9 +19,8 @@ namespace NewAppl.Controllers
         }
 
         // GET: Contact
-        public ActionResult Index(string data, string status)
+        public ActionResult Index(string status)
         {
-            this.ViewBag.Data = data;
             this.ViewBag.Status = status;
 
             return View();
@@ -32,7 +31,7 @@ namespace NewAppl.Controllers
         {
             Result sendMail = this._model.SendMail(model);
 
-            return RedirectToAction("Index", "Contact", new { data = sendMail.Data, status = sendMail.Status });
+            return RedirectToAction("Index", "Contact", new { status = sendMail.Status });
         }
     }
 }

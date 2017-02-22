@@ -49,5 +49,19 @@ namespace NewAppl.Controllers
             }, JsonRequestBehavior.AllowGet);
             return result;
         }
+
+        [HttpGet]
+        public ActionResult GetConstants(string query)
+        {
+            string addQuery = !string.IsNullOrEmpty(query) ? "constants?query={\"action\":\"" + query + "\"}" : "constants";
+
+            Result data = this._model.GetData(addQuery);
+            JsonResult result = Json(new
+            {
+                data = data.Data,
+                status = data.Status
+            }, JsonRequestBehavior.AllowGet);
+            return result;
+        }
     }
 }
