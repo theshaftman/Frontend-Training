@@ -4,19 +4,48 @@
     self.currentFile;
     self.currentFiles;
 
+    self.currentCategoryGroups;
+    self.currentCategories;
+
     self.loadInformation = function () {
         var currentFile,
-            currentFileHTML = "";
+            currentFileHTML = "",
+            categoryHTML = "",
+            currentCategoryGroup = [];
 
         $("#fulltext").val(urlPath["query"]);
 
         $.when(Service.getData("/Recipes/GetRecipes", 'sort={"recipeId": -1}'),
-            Service.getData("/About/GetFiles"))
-            .done(function (responseA, responseB) {
-                if (responseA[0]["status"].toLowerCase() === "completed") {
+            Service.getData("/About/GetFiles"),
+            Service.getData("/Categories/GetCategoryGroups"),
+            Service.getData("/Categories/GetCategories"))
+            .done(function (responseA, responseB, responseC, responseD) {
+                if (responseA[0]["status"].toLowerCase() === "completed" && responseB[0]["status"].toLowerCase() === "completed" &&
+                        responseC[0]["status"].toLowerCase() === "completed" && responseD[0]["status"].toLowerCase() === "completed") {
                     responseA[0]["data"] = responseA[0]["data"].replace(/\\n/g, "<br />");
                     self.currentData = JSON.parse(responseA[0]["data"]);
                     self.currentFiles = JSON.parse(responseB[0]["data"]);
+
+                    self.currentCategoryGroups = JSON.parse(responseC[0]["data"]);
+                    self.currentCategories = JSON.parse(responseD[0]["data"]);
+
+                    for (var i = 0; i < self.currentCategoryGroups.length; i++) {
+                        categoryHTML += '<div class="facetwp-title">' +
+                            '     <span>' + self.currentCategoryGroups[i]["groupName"] + '</span>' +
+                            ' </div>';
+
+                        currentCategoryGroup = [];
+                        currentCategoryGroup = self.currentCategories.filter(function (obj) {
+                            return obj["categoryGroup"] == self.currentCategoryGroups[i]["groupId"];
+                        });
+                        for (var j = 0; j < currentCategoryGroup.length; j++) {
+                            categoryHTML += '<div class="facetwp-checkbox" data-value="' + currentCategoryGroup[j]["categoryName"] + '">' +
+                                '    <span class="choose"></span><span class="categoryName">' + currentCategoryGroup[j]["categoryName"] + '</span> <!--<span class="facetwp-counter">(2)</span>-->' +
+                                '</div>';
+                        }
+                    }
+
+                    $("#categoryView").append(categoryHTML);
 
                     if (urlPath["query"].length > 0) {
                         self.currentData = self.currentData.filter(function (obj) {

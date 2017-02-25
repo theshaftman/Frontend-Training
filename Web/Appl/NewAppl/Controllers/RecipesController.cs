@@ -19,26 +19,14 @@ namespace NewAppl.Controllers
         }
 
         // GET: Recipes
-        public ActionResult Index(string query)
+        public ActionResult Index(string query, string category)
         {
             this.ViewBag.Query = query;
             this.ViewData["Query"] = query;
+            this.ViewBag.Category = category;
+            this.ViewData["Category"] = category;
 
             return View();
-        }
-
-        [HttpGet]
-        public ActionResult GetCategories()
-        {
-            Result currentData = this._model.GetData("categories");
-
-            JsonResult result = Json(new 
-            {
-                status = currentData.Status,
-                data = currentData.Data
-            }, JsonRequestBehavior.AllowGet);
-
-            return result;
         }
 
         [HttpGet]
