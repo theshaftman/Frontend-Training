@@ -42,10 +42,13 @@ namespace NewAppl.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRecipes(string query, string limit)
+        public ActionResult GetRecipes(string query, string sort, string limit)
         {
-            string addQuery = !string.IsNullOrEmpty(query) ? "?" + query : "";
-            addQuery += !string.IsNullOrEmpty(limit) ? string.Format("&limit={0}", limit) : "";
+            string addQuery = !string.IsNullOrEmpty(query) ? string.Format("?query={0}", query) : "";
+            addQuery += !string.IsNullOrEmpty(sort) ? string.Format("{0}sort={1}", 
+                (!string.IsNullOrEmpty(addQuery) ? "&" : "?"), sort) : "";
+            addQuery += !string.IsNullOrEmpty(limit) ? string.Format("{0}limit={1}", 
+                (!string.IsNullOrEmpty(addQuery) ? "&" : "?"), limit) : "";
 
             Result currentData = this._model.GetData("recipes" + addQuery);
 

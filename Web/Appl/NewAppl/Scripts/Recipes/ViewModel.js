@@ -10,7 +10,7 @@
 
         $("#fulltext").val(urlPath["query"]);
 
-        $.when(Service.getData("/Recipes/GetRecipes", 'query=sort={"recipeId": -1}'),
+        $.when(Service.getData("/Recipes/GetRecipes", 'sort={"recipeId": -1}'),
             Service.getData("/About/GetFiles"))
             .done(function (responseA, responseB) {
                 if (responseA[0]["status"].toLowerCase() === "completed") {
