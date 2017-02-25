@@ -42,9 +42,11 @@ namespace NewAppl.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRecipes(string query)
+        public ActionResult GetRecipes(string query, string limit)
         {
             string addQuery = !string.IsNullOrEmpty(query) ? "?" + query : "";
+            addQuery += !string.IsNullOrEmpty(limit) ? string.Format("&limit={0}", limit) : "";
+
             Result currentData = this._model.GetData("recipes" + addQuery);
 
             JsonResult result = Json(new
