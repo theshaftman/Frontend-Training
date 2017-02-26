@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewAppl.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,15 @@ namespace NewAppl.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            bool isLogged = false;
+            if (Request.Cookies[Constant.COOKIE_NAME] != null)
+            {
+                string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+                ViewBag.Username = username;
+                isLogged = true;
+            }
+
+            return View(isLogged);
         }
     }
 }

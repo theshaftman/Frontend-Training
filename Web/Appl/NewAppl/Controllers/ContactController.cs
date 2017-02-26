@@ -21,9 +21,16 @@ namespace NewAppl.Controllers
         // GET: Contact
         public ActionResult Index(string status)
         {
+            bool isLogged = false;
+            if (Request.Cookies[Constant.COOKIE_NAME] != null)
+            {
+                string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+                ViewBag.Username = username;
+                isLogged = true;
+            }
             this.ViewBag.Status = status;
 
-            return View();
+            return View(isLogged);
         }
 
         [HttpPost]

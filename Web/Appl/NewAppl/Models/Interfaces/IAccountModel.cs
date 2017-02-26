@@ -11,5 +11,6 @@ namespace NewAppl.Models.Interfaces
     internal interface IAccountModel
     {
         Result LogIn(FormCollection model);
+        Result Register(FormCollection model);
     }
 }

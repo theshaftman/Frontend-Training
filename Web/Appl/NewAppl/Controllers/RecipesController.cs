@@ -21,12 +21,20 @@ namespace NewAppl.Controllers
         // GET: Recipes
         public ActionResult Index(string query, string category)
         {
+            bool isLogged = false;
+            if (Request.Cookies[Constant.COOKIE_NAME] != null)
+            {
+                string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+                ViewBag.Username = username;
+                isLogged = true;
+            }
+
             this.ViewBag.Query = query;
             this.ViewData["Query"] = query;
             this.ViewBag.Category = category;
             this.ViewData["Category"] = category;
 
-            return View();
+            return View(isLogged);
         }
 
         [HttpGet]
@@ -51,10 +59,18 @@ namespace NewAppl.Controllers
 
         public ActionResult Recipe(string id)
         {
+            bool isLogged = false;
+            if (Request.Cookies[Constant.COOKIE_NAME] != null)
+            {
+                string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+                ViewBag.Username = username;
+                isLogged = true;
+            }
+
             ViewBag.Id = id;
             ViewData["Id"] = id;
 
-            return View();
+            return View(isLogged);
         }
     }
 }

@@ -21,7 +21,15 @@ namespace NewAppl.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View();
+            bool isLogged = false;
+            if (Request.Cookies[Constant.COOKIE_NAME] != null)
+            {
+                string username = Request.Cookies[Constant.COOKIE_NAME]["Username"].ToString();
+                ViewBag.Username = username;
+                isLogged = true;
+            }
+
+            return View(isLogged);
         }
 
         [HttpGet]
