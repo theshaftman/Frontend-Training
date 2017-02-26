@@ -1,4 +1,10 @@
-﻿ViewModel.Recipes = function () {
+﻿Array.prototype.containsAny = function (arr) {
+    return this.some(function (v) {
+        return arr.indexOf(v) >= 0
+    });
+}
+
+ViewModel.Recipes = function () {
     var self = this;
     self.currentData;
     self.currentFile;
@@ -12,7 +18,9 @@
         var currentFile,
             currentFileHTML = "",
             categoryHTML = "",
-            currentCategoryGroup = [];
+            currentCategoryGroup = [],
+            selectedCategories = urlPath["category"] ? urlPath["category"].split(",") : [],
+            currentCategorySelection;
 
         $("#fulltext").val(urlPath["query"]);
 
@@ -40,17 +48,27 @@
                             return obj["categoryGroup"] == self.currentCategoryGroups[i]["groupId"];
                         });
                         for (var j = 0; j < currentCategoryGroup.length; j++) {
-                            categoryHTML += '<div class="facetwp-checkbox" data-value="' + currentCategoryGroup[j]["categoryName"] + '">' +
-                                '    <span class="choose"></span><span class="categoryName">' + currentCategoryGroup[j]["categoryName"] + '</span> <!--<span class="facetwp-counter">(2)</span>-->' +
+                            currentCategorySelection = selectedCategories.indexOf(currentCategoryGroup[j]["categoryId"]) !== -1 ?
+                                "checked=\"checked\"" : "";
+
+                            categoryHTML += '<div class="facetwp-checkbox" data-value="' + currentCategoryGroup[j]["categoryName"] + '" style="position: relative;">' +
+                                '    <input value="' + currentCategoryGroup[j]["categoryId"] + '" ' + currentCategorySelection + ' type="checkbox" style="position: absolute; left: -120px;" /><span class="categoryName">' + currentCategoryGroup[j]["categoryName"] + '</span> <!--<span class="facetwp-counter">(2)</span>-->' +
                                 '</div>';
                         }
                     }
+
+                    loadRecipesEvent();
 
                     $("#categoryView").append(categoryHTML);
 
                     if (urlPath["query"].length > 0) {
                         self.currentData = self.currentData.filter(function (obj) {
                             return obj["recipeTitle"].toLowerCase().indexOf(urlPath["query"].toLowerCase()) > -1 ? obj : null;
+                        });
+                    }
+                    if (urlPath["category"].length > 0) {
+                        self.currentData = self.currentData.filter(function (obj) {
+                            return obj["categoryID"] && obj["categoryID"].split(",").containsAny(selectedCategories) ? obj : null;
                         });
                     }
 
@@ -68,6 +86,40 @@
                     $(".recipe-index").append(currentFileHTML);
                 }
             });
+    }
+
+    function loadRecipesEvent() {
+        var checkedCategories,
+            checkedCategoriesValue,
+            currentLink;
+
+        $("#fulltext").unbind();
+        $("#fulltext").on("keypress", function (e) {
+            // e.preventDefault();
+
+            if (e.keyCode == 13) {
+                loadNewUrl();
+            }
+            return true;
+        });
+
+        $("#filterClick").unbind();
+        $("#filterClick").on("click", function (e) {
+            e.preventDefault();
+            loadNewUrl();
+        });
+    }
+
+    function loadNewUrl() {
+        checkedCategoriesValue = "";
+        checkedCategories = [];
+        checkedCategories = $('input[type="checkbox"]:checked');
+        checkedCategories.each(function (obj, val) { checkedCategoriesValue += (val.value) + " "; });
+        checkedCategoriesValue = checkedCategoriesValue.substring(0, checkedCategoriesValue.length - 1);
+        checkedCategoriesValue = checkedCategoriesValue.replace(/ /, ",");
+
+        currentLink = window.location.origin + "/Recipes?query=" + $("#fulltext").val() + "&category=" + checkedCategoriesValue;
+        window.location = currentLink;
     }
 
     self.loadRecipeInformation = function () {
