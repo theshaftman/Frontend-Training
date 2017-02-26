@@ -208,6 +208,8 @@
     <Content Include="Images\logo.png" />
     <Content Include="Scripts\About\Controller.js" />
     <Content Include="Scripts\About\ViewModel.js" />
+    <Content Include="Scripts\Account\Controller.js" />
+    <Content Include="Scripts\Account\ViewModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\chubbycheek - FTP.pubxml" />
@@ -268,10 +270,10 @@
     <Content Include="Views\Recipes\Index.cshtml" />
     <Content Include="Views\Recipes\Recipe.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

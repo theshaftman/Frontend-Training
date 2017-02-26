@@ -22,6 +22,10 @@
             Controller.Contact.init();
             currentWebId = "contact";
             break;
+        case "Account":
+            Controller.Account.init();
+            currentWebId = "account";
+            break;
         default:
             Controller.Home.init();
             currentWebId = "home";

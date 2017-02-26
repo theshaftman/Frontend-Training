@@ -40,8 +40,8 @@ namespace NewAppl.Models.Data
 
         Result IAccountModel.Register(FormCollection model)
         {
-            string username = model["username"];
-            string password = model["password"];
+            string username = model["registerUsername"];
+            string password = model["registerPassword"];
 
             var client = new RestClient("https://baas.kinvey.com/user/kid_S1lQExb_e");
             var request = new RestRequest(Method.POST);

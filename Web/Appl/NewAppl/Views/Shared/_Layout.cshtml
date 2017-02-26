@@ -38,8 +38,30 @@
         div {
             text-align: justify;
         }
+
+        #accountPlace input {
+            height: 25px;
+            width: 150px;
+        }
+
+        #accountPlace ul li {
+            display: inline-block;
+        }
+
+        #accountPlace input[type="submit"] {
+            padding: 0px;
+            width: 100px;
+        }
+
+        #accountPlace input {
+            padding: 5px;
+        }
+
+        .required {
+            color: red;
+        }
     </style>
-    
+
     <link href="~/Styles/Plugin/CSS/bootstrap.min.css" rel="stylesheet" />
 
     <link href="~/Styles/Plugin/style01.css" rel="stylesheet" />
@@ -83,7 +105,46 @@
                                 </form>
                             </div>
                         </section>*@
-                    @*<section id="simple-social-icons-2" class="widget-2 widget-even widget simple-social-icons"><div class="widget-2 widget-even widget-wrap"><ul class="aligncenter"><li class="ssi-facebook"><a href="https://www.facebook.com/TheFullHelping/" target="_blank"><svg role="img" class="social-facebook" aria-labelledby="social-facebook"><title id="social-facebook">Facebook</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-facebook"></use></svg></a></li><li class="ssi-instagram"><a href="https://www.instagram.com/thefullhelping/" target="_blank"><svg role="img" class="social-instagram" aria-labelledby="social-instagram"><title id="social-instagram">Instagram</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-instagram"></use></svg></a></li><li class="ssi-pinterest"><a href="https://www.pinterest.com/thefullhelping/" target="_blank"><svg role="img" class="social-pinterest" aria-labelledby="social-pinterest"><title id="social-pinterest">Pinterest</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-pinterest"></use></svg></a></li><li class="ssi-twitter"><a href="https://twitter.com/thefullhelping" target="_blank"><svg role="img" class="social-twitter" aria-labelledby="social-twitter"><title id="social-twitter">Twitter</title><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.thefullhelping.com/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-twitter"></use></svg></a></li></ul></div></section>*@
+                    <section id="accountPlace" class="widget-2 widget-even widget simple-social-icons">
+                        <div class="widget-2 widget-even widget-wrap">
+                            @if (!this.Model)
+                            {
+                                <form method="post" action="/Account/Login">
+                                    <ul class="aligncenter">
+                                        <li>
+                                            <label for="loginEmail">Имейл: </label>
+                                            <input required="required" name="username" type="text" />
+                                        </li>
+                                        <li>
+                                            <label for="loginPassword">Парола: </label>
+                                            <input required="required" name="password" type="text" />
+                                        </li>
+                                        <li>
+                                            <input type="submit" value="Sign In" />
+                                        </li>
+                                        <li>
+                                            <a href="/Account/Register">Register</a>
+                                        </li>
+                                    </ul>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" action="/Account/Logoff">
+                                    <ul class="aligncenter">
+                                        <li>
+                                            <span>Здравей, <span class="required">@this.ViewData["Username"]</span></span>
+                                        </li>
+                                        <li>
+                                            <input type="submit" value="Log Off" />
+                                        </li>
+                                    </ul>
+                                </form>
+                            }
+                        </div>
+                    </section>
+
+                    <!-- NAV menu -->
                     <section id="nav_menu-4" class="widget-3 widget-last widget-odd widget widget_nav_menu">
                         <div class="widget-3 widget-last widget-odd widget-wrap">
                             <div class="menu-toggle">
