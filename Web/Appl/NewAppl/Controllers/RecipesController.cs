@@ -92,11 +92,19 @@ namespace NewAppl.Controllers
         public ActionResult PostComment(FormCollection model)
         {
             Result postComment = this._model.PostComment(model);
+            string status = "issuePostComment";
+            string data = string.Empty;
+
+            if (postComment != null)
+            {
+                status = postComment.Status;
+                data = postComment.Data;
+            }
 
             JsonResult result = Json(new
             {
-                status = postComment.Status,
-                data = postComment.Data
+                status = status,
+                data = data
             }, JsonRequestBehavior.AllowGet);
 
             return result;

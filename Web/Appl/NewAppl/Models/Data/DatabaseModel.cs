@@ -61,7 +61,7 @@ namespace NewAppl.Models.Data
             string commentDate = DateTime.Now.ToString();
 
             if (string.IsNullOrEmpty(recipeId) || 
-                (string.IsNullOrEmpty(commentName) || string.IsNullOrEmpty(commentEmail)))
+                (string.IsNullOrEmpty(commentName) && string.IsNullOrEmpty(commentEmail)))
             {
                 return null;
             }
