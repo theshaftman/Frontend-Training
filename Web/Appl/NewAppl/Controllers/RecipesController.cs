@@ -72,5 +72,34 @@ namespace NewAppl.Controllers
 
             return View(isLogged);
         }
+
+        [HttpGet]
+        public ActionResult GetComments(string recipeId)
+        {
+            string data = "?query={\"recipeId\":\"" + recipeId + "\"}&sort{\"_kmd\": { \"ect\": -1}}";
+            Result comments = this._model.GetData("comments" + data);
+
+            JsonResult result = Json(new
+            {
+                status = comments.Status,
+                data = comments.Data
+            }, JsonRequestBehavior.AllowGet);
+
+            return result;
+        }
+
+        [HttpPost]
+        public ActionResult PostComment(FormCollection model)
+        {
+            Result postComment = this._model.PostComment(model);
+
+            JsonResult result = Json(new
+            {
+                status = postComment.Status,
+                data = postComment.Data
+            }, JsonRequestBehavior.AllowGet);
+
+            return result;
+        }
     }
 }

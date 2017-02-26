@@ -12,7 +12,19 @@
         return $.ajax(settings);
     }
 
+    self.postData = function (url, data) {
+        var settings = {
+            type: "POST",
+            url: window.location.origin + url,
+            dataType: "json",
+            data: data
+        };
+
+        return $.ajax(settings);
+    }
+
     return {
-        getData: self.getData
+        getData: self.getData,
+        postData: self.postData
     }
 }());

@@ -6,6 +6,7 @@
 
     self.currentCategoryGroups;
     self.currentCategories;
+    self.currentComments;
 
     self.loadInformation = function () {
         var currentFile,
@@ -70,6 +71,10 @@
     }
 
     self.loadRecipeInformation = function () {
+        if (currentUsername.length === 0) {
+            $("#userInformation").css("display", "block");
+        }
+
         $.when(Service.getData("/Recipes/GetRecipes", { query: "{\"recipeId\":\"" + urlPath["currentId"] + "\"}" }),
             Service.getData("/About/GetFiles", { query: urlPath["currentId"] }))
             .done(function (responseA, responseB) {
@@ -84,5 +89,61 @@
                 self.currentFile = JSON.parse(responseB[0]["data"]);
                 $("#entryPicture").attr("src", self.currentFile[0]["_downloadURL"]);
             });
+    }
+
+    self.loadComments = function () {
+        var currentHtml,
+            currentName;
+
+        Service.getData("/Recipes/GetComments", { recipeId: urlPath["currentId"] })
+            .done(function (response) {
+                self.currentComments = [];
+                self.currentComments = JSON.parse(response["data"]);
+                currentHtml = "";
+
+                for (var i = 0; i < self.currentComments.length; i++) {
+                    currentName = "";
+                    currentName = self.currentComments[i]["commentEmail"] && self.currentComments[i]["commentEmail"].length > 0 ?
+                        self.currentComments[i]["commentEmail"] :
+                        self.currentComments[i]["commentName"];
+                    currentHtml +=
+                        '<li class="comment even thread-even depth-1" id="comment-01">' +
+                        '    <article itemprop="comment">' +
+                        '        <header class="comment-header">' +
+                        '            <p class="comment-author" itemprop="author">' +
+                        '                <span class="commentAuthor" style="color: #95b5ac;">' + currentName + '</span> ' +
+                        '            </p>' +
+                        '            <p class="comment-meta">' +
+                        '                <time class="commentTime" itemprop="datePublished">' +
+                        '                    ' + self.currentComments[i]["commentDate"] +
+                        '                </time>' +
+                        '            </p>' +
+                        '        </header>' +
+                        '        <div class="comment-content" itemprop="text">' +
+                        '            <p class="commentText">' + self.currentComments[i]["commentText"] + '</p>' +
+                        '        </div>' +
+                        '    </article>' +
+                        '</li>';
+                }
+
+                $("#commentList").html("");
+                $("#commentList").html(currentHtml);
+            });
+    }
+
+    self.postComment = function () {
+        $("#submit").unbind();
+        $("#submit").on("click", function (e) {
+            e.preventDefault();
+
+            Service.postData("/Recipes/PostComment", {
+                recipeId: urlPath["currentId"],
+                commentName: currentUsername.length > 0 ? currentUsername : $("#author").val(),
+                commentEmail: currentUsername.length > 0 ? currentUsername : $("#email").val(),
+                commentText: $("#comment").val()
+            }).done(function (response) {
+                self.loadComments();
+            });
+        });
     }
 }

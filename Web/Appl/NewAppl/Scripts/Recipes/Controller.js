@@ -8,6 +8,8 @@
 
     self.recipeInit = function () {
         model.loadRecipeInformation();
+        model.loadComments();
+        model.postComment();
     }
 
     return {
