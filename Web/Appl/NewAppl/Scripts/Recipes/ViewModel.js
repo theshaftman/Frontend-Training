@@ -70,7 +70,7 @@
     }
 
     self.loadRecipeInformation = function () {
-        $.when(Service.getData("/Recipes/GetRecipes", { query: "query={\"recipeId\":\"" + urlPath["currentId"] + "\"}" }),
+        $.when(Service.getData("/Recipes/GetRecipes", { query: "{\"recipeId\":\"" + urlPath["currentId"] + "\"}" }),
             Service.getData("/About/GetFiles", { query: urlPath["currentId"] }))
             .done(function (responseA, responseB) {
                 responseA[0]["data"] = responseA[0]["data"].replace(/\\n/g, "<br />");
