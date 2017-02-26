@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Recipes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section styles {
@@ -19,13 +19,25 @@
         #searchInput {
             margin-bottom: 20px;
         }
+
+        #genesis-content img {
+            height: 150px;
+        }
+
+        #genesis-content {
+        }
+
+        .facetwp-checkbox {
+            margin-left: 20px;
+        }
     </style>
 }
 
 @section scripts {
     <script type="text/javascript">
         var urlPath = {
-            query: '@this.ViewBag.Query'
+            query: '@this.ViewBag.Query',
+            category: '@this.ViewBag.Category'
         }
     </script>
 
@@ -39,7 +51,7 @@
     <main class="content" id="genesis-content">
         <section id="searchInput" class="widget-1 widget-first widget-odd widget widget_search">
             <div class="widget-1 widget-first widget-odd widget-wrap">
-                <form class="search-form" itemprop="potentialAction" itemscope=""  method="get" action="#" role="search">
+                <form class="search-form" itemprop="potentialAction" itemscope="" method="get" action="#" role="search">
                     <label class="search-form-label screen-reader-text" for="fulltext"></label>
                     <input itemprop="query-input" type="search" name="query" id="fulltext" placeholder=""><input type="submit" value="Намери">
                 </form>
@@ -64,11 +76,8 @@
     <section id="cookd-facet-2" class="widget-1 widget-first widget-odd widget facetwp">
         <div class="widget-1 widget-first widget-odd widget-wrap">
             <h3 class="widgettitle widget-title">Храни</h3>
-            <div class="facetwp-facet facetwp-facet-meals facetwp-type-checkboxes" data-name="meals" data-type="checkboxes">
-                <!--
-                <div class="facetwp-checkbox" data-value="main-dishes"><span class="choose"></span>Моркови <span class="facetwp-counter">(2)</span></div>
-                <div class="facetwp-checkbox" data-value="breakfast"><span class="choose"></span>Краставици <span class="facetwp-counter">(1)</span></div>
-                    -->
+            <div id="categoryView" class="facetwp-facet facetwp-facet-meals facetwp-type-checkboxes" data-name="meals" data-type="checkboxes">
+                                
             </div>
         </div>
     </section>

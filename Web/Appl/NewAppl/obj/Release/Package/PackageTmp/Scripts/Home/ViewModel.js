@@ -6,7 +6,7 @@
     self.loadPage = function () {
         var currentFile;
 
-        $.when(Service.getData("/Recipes/GetRecipes", 'query=sort={"recipeId": -1}&limit=3'),
+        $.when(Service.getData("/Recipes/GetRecipes", 'query={"isVisible":"1"}&sort={"recipeId": -1}&limit=3'),
             Service.getData("/About/GetFiles"))
             .done(function (responseA, responseB) {
                 if (responseA[0]["status"].toLowerCase() === "completed") {
@@ -18,7 +18,7 @@
 
                         // add information to the top
                         $("#solidQuo").append(
-                             '   <li aria-hidden="true" class="soliloquy-item soliloquy-item-7 soliloquy-image-slide soliloquy-post-32696 soliloquy-post soliloquy-type-post soliloquy-status-publish soliloquy-format-standard soliloquy-has-post-thumbnail soliloquy-category-breakfast soliloquy-category-featured soliloquy-category-gluten-free soliloquy-category-meals soliloquy-category-recipes soliloquy-category-tree-nut-free soliloquy-tag-breakfast soliloquy-tag-brunch soliloquy-tag-brussels-sprouts soliloquy-tag-cornmeal soliloquy-tag-grits soliloquy-tag-sausage soliloquy-tag-tempeh soliloquy-entry" draggable="false" style="list-style: none; float: left; position: relative; width: ' + (1149.99 / parseFloat(self.currentData.length)) + 'px; margin-right: 10px;">' +
+                             '   <li aria-hidden="true" class="soliloquy-item soliloquy-item-7 soliloquy-image-slide soliloquy-post-32696 soliloquy-post soliloquy-type-post soliloquy-status-publish soliloquy-format-standard soliloquy-has-post-thumbnail soliloquy-category-breakfast soliloquy-category-featured soliloquy-category-gluten-free soliloquy-category-meals soliloquy-category-recipes soliloquy-category-tree-nut-free soliloquy-tag-breakfast soliloquy-tag-brunch soliloquy-tag-brussels-sprouts soliloquy-tag-cornmeal soliloquy-tag-grits soliloquy-tag-sausage soliloquy-tag-tempeh soliloquy-entry" draggable="false" style="list-style: none; float: left; position: relative; width: ' + (1149.99 / parseFloat(self.currentData.length)) + 'px; height:500px; margin-right: 10px;">' +
                              '       <a href="/Recipes/Recipe?id=' + self.currentData[i]["recipeId"] + '" class="soliloquy-link" title="' + self.currentData[i]["recipeTitle"] + '">' +
                              '           <img id="soliloquy-image-32696" class="soliloquy-image soliloquy-image-7" src="' + currentFile["_downloadURL"] + '" alt="' + self.currentData[i]["recipeTitle"] + '">' +
                              '       </a>' +

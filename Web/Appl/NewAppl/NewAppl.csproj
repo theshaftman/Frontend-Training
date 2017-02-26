@@ -157,6 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ContactController.cs">
       <SubType>Code</SubType>
@@ -169,11 +172,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BusinessLayer\Structure\Result.cs" />
+    <Compile Include="Models\Data\AccountModel.cs" />
     <Compile Include="Models\Data\Constant.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Data\DatabaseModel.cs" />
     <Compile Include="Models\Data\EmailModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Interfaces\IAccountModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Interfaces\IDatabaseModel.cs" />
@@ -264,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
